@@ -1,0 +1,211 @@
+
+#grafik-container {
+    width: 600px;
+    height: 400px;
+}
+
+.navbar-brand .logo-img {
+    width: 7vw;
+    /* Ukuran gambar responsif */
+    max-width: 150px;
+    /* Batasan maksimum ukuran gambar */
+    height: auto;
+    /* Menjaga proporsi gambar */
+    margin-right: 10px;
+    /* Menambahkan jarak antara gambar dan teks */
+}
+
+@media (max-width: 768px) {
+    .navbar-brand .logo-img {
+        min-width: 110px;
+        /* Batasan minimum ukuran gambar untuk tablet dan handphone */
+    }
+}
+
+.bg-public {
+    /* background-color: #0000CD; */
+    /* Medium blue */
+
+    background-color: #003366;
+}
+
+.navbar .brand-text {
+    color: white;
+    /* Warna teks putih */
+    margin-top: 5px;
+    /* Jarak atas */
+    margin-bottom: 0;
+    /* Hapus margin bawah */
+}
+
+@media (max-width: 576px) {
+    .navbar .brand-text {
+        margin-top: 0;
+        /* Jarak atas */
+        font-size: 0.8rem;
+        /* Ukuran teks untuk perangkat seluler */
+    }
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.carousel-item img {
+    max-height: 400px; /* Atur tinggi maksimum gambar */
+    object-fit: cover; /* Membuat gambar sesuai dengan ukuran container */
+}
+
+.education-icon {
+    font-size: 8rem; /* Sesuaikan ukuran ikon */
+    color: #6c757d; /* Sesuaikan warna ikon */
+}
+
+.red-box {
+    background-color: crimson;
+    padding: 7px;
+    border-radius: 3px;
+}
+
+.blue-box {
+    background-color: mediumblue;
+    padding: 7px;
+    border-radius: 3px;
+}
+
+.box-shadow {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 -4px 6px rgba(0, 0, 0, 0.1), 4px 0 6px rgba(0, 0, 0, 0.1), -4px 0 6px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+    /* border: 1px solid red; Memberikan border merah */
+    box-shadow: 0 9px 9px rgba(1, 1, 1, 0.1);
+    /* Memberikan shadow */
+}
+
+
+/* Atur lebar dan tinggi gambar dalam kartu */
+.card-img-top {
+    width: 100%;
+    /* Lebar maksimum */
+    height: 200px;
+    /* Tinggi tetap */
+    object-fit: cover;
+    /* Memastikan gambar terpotong atau memperluas sesuai proporsi yang ditetapkan */
+}
+
+.card-title {
+    font-weight: bold;
+    /* Membuat judul tebal */
+    color: black;
+    /* Mengubah warna teks menjadi hitam */
+    text-decoration: none;
+    /* Menghapus garis bawah */
+    font-weight: bold;
+}
+
+canvas {
+    width: 100%;
+    height: auto;
+}
+
+.chart-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.box-shadow {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 -4px 6px rgba(0, 0, 0, 0.1), 4px 0 6px rgba(0, 0, 0, 0.1), -4px 0 6px rgba(0, 0, 0, 0.1);
+}
+
+.rounded-box {
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 -4px 6px rgba(0, 0, 0, 0.3), 4px 0 6px rgba(0, 0, 0, 0.3), -4px 0 6px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.rounded-background1 {
+    background-color: crimson;
+    border-radius: 15px;
+    /* Sudut tumpul */
+    padding: 20px;
+    /* Spasi dalam */
+    display: inline-block;
+    color: white;
+}
+
+.rounded-background2 {
+    background-color: mediumblue;
+    border-radius: 15px;
+    /* Sudut tumpul */
+    padding: 20px;
+    /* Spasi dalam */
+    display: inline-block;
+    color: white;
+}
+
+.recent-post-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+}
+
+.recent-posts-container {
+    max-height: 400px;
+    max-width: 100%;
+    overflow-y: scroll;
+}
+
+.list-group-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+}
+
+.list-group-item img {
+    flex-shrink: 0;
+}
+
+.list-group-item div {
+    flex-grow: 1;
+    padding-left: 0.5rem;
+}
+
+
+.footer {
+    background-color: #003366;
+    color: #fff;
+    padding: 20px 0;
+}
+
+.footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.footer .contact-info i {
+    color: #ffc107;
+    font-size: 24px;
+    margin-right: 10px;
+    /* Tambahkan margin kanan pada ikon */
+}
+
+.footer .social-icons a {
+    color: #fff;
+    margin-right: 15px;
+    font-size: 24px;
+}
+
+.footer .bottom-bar {
+    /* background-color: #000; */
+    background-color: rgba(137, 174, 226, 0.375);
+    color: #fff;
+    padding: 10px 0;
+}
+
