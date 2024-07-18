@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -23,13 +22,12 @@ class UserSeeder extends Seeder
             'jabatan' => 'Creator',
             'jenis_kelamin' => 'pria',
             'tempat_lahir' => 'Banyuwangi',
-            'tanggal_lahir' => '',
+            'tanggal_lahir' => null, // Set to null if not available
             'pendidikan_terakhir' => 'D4 TRPL',
             'bidang_studi' => 'TI',
-            'status_pekerjaan' => 'pns',
+            'status_pekerjaan' => 'pns', // Updated to match the new enum values
             'role' => 'super admin',
             'alamat' => 'Banyuwangi',
         ]);
-
     }
 }

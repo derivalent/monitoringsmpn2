@@ -44,3 +44,8 @@ function openImageModal(src) {
 }
 
 CKEDITOR.replace('isi');
+
+// Set timeout untuk menghilangkan alert setelah 2 detik
+setTimeout(function() {
+    $('#success-alert').fadeOut('fast');
+}, 2000); // 2000 milidetik = 2 detik

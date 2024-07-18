@@ -139,7 +139,7 @@ th, .tampilantabel {
 } */
 
 .table-wrapper-mini {
-    max-height: 300px;
+    max-height: 170px;
     overflow-y: scroll;
 }
 

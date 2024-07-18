@@ -3,7 +3,7 @@
         <div class="sb-sidenav-menu">
             <div class="nav">
                 <div class="sb-sidenav-menu-heading">Core</div>
-                <a class="nav-link" href="{{ 'dashboard_admin' }}">
+                <a class="nav-link" href="{{ route('KategoriKegiatan.index') }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Dashboard
                 </a>
@@ -59,7 +59,7 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                     Tables
                 </a> --}}
-                <a class="nav-link" href="{{ 'kelola_pengguna' }}">
+                <a class="nav-link" href="{{ route('kelola_pengguna') }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                     Kelola Pengguna
                 </a>
