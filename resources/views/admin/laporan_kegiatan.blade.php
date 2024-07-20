@@ -27,13 +27,13 @@
                                     <option value="Semester Genap">Semester Genap</option>
                                 </select>
                             </div>
-                            <div class="me-3 mb-2">
+                            {{-- <div class="me-3 mb-2">
                                 <select id="select-semester" class="form-select form-select-sm">
                                     <option value="">-Pilih Guru-</option>
                                     <option value="Guru A">Guru A</option>
                                     <option value="Guru B">Guru B</option>
                                 </select>
-                            </div>
+                            </div> --}}
                             {{-- <div class="me-3 mb-2">
                                 <select id="select-semester" class="form-select form-select-sm">
                                     <option value="">-Status-</option>

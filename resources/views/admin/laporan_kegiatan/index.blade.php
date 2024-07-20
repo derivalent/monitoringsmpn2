@@ -27,13 +27,13 @@
                                     <option value="Semester Genap">Semester Genap</option>
                                 </select>
                             </div>
-                            <div class="me-3 mb-2">
+                            {{-- <div class="me-3 mb-2">
                                 <select id="select-semester" class="form-select form-select-sm">
                                     <option value="">-Pilih Guru-</option>
                                     <option value="Guru A">Guru A</option>
                                     <option value="Guru B">Guru B</option>
                                 </select>
-                            </div>
+                            </div> --}}
                             {{-- <div class="me-3 mb-2">
                                 <select id="select-semester" class="form-select form-select-sm">
                                     <option value="">-Status-</option>
@@ -60,7 +60,7 @@
                                     <i class="fa-solid fa-print"></i>
                                 </a>
                             </div>
-                            <a class="btn btn-success btn-sm mb-2" href="#">
+                            <a class="btn btn-success btn-sm mb-2" href="{{ route('LaporanKegiatan.create') }}">
                                 <i class="fa fa-plus"></i> &nbsp;Tambah
                             </a>
                         </div>
@@ -76,8 +76,6 @@
                             <th>Kategori</th>
                             <th>Gambar</th>
                             <th>Keterangan</th>
-                            {{-- <th>Status</th> --}}
-                            {{-- <th>Catatan</th> --}}
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -88,13 +86,26 @@
                             <th>Kategori</th>
                             <th>File</th>
                             <th>Keterangan</th>
-                            {{-- <th>Status</th> --}}
-                            {{-- <th>Catatan</th> --}}
                             <th>Aksi</th>
                         </tr>
                     </tfoot>
                     <tbody>
+                        @foreach ($laporanKegiatan as $lk)
                         <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $lk->nama }}</td>
+                            <td>{{ $lk->kategori->kategori_kegiatan }}</td>
+                            <td>
+                                <img src="{{ asset('images/' . $lk->gambar) }}" alt="Gambar" style="width: 100px; cursor: pointer;" onclick="openImageModal('path/to/image.jpg')">
+                            </td>
+                            <td class="isi-konten">{{ $lk->keterangan }}</td>
+                            <td>
+                            <button class="btn btn-warning btn-sm" onclick="editItem(this)">Edit</button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteItem(this)">Delete</button>
+                            </td>
+                        </tr>
+                        @endforeach
+                        {{-- <tr>
                             <td>1</td>
                             <td>Laporan Mengajar hari 1,2,3</td>
                             <td>Kategori Contoh</td>
@@ -106,8 +117,8 @@
                             <button class="btn btn-warning btn-sm" onclick="editItem(this)">Edit</button>
                             <button class="btn btn-danger btn-sm" onclick="deleteItem(this)">Delete</button>
                             </td>
-                        </tr>
-                        <tr>
+                        </tr> --}}
+                        {{-- <tr>
                             <td>2</td>
                             <td>Judul Contoh</td>
                             <td>Kategori Contoh</td>
@@ -119,92 +130,10 @@
                                 <button class="btn btn-warning btn-sm" onclick="editItem(this)">Edit</button>
                                 <button class="btn btn-danger btn-sm" onclick="deleteItem(this)">Delete</button>
                             </td>
-                        </tr>
+                        </tr> --}}
                     </tbody>
                 </table>
             </div>
-            {{-- <div class="card-body">
-                <table class="table table-striped table-bordered" id="datatablesSimple">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>$320,800</td>
-                        </tr>
-                        <tr>
-                            <td>Garrett Winters</td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>63</td>
-                            <td>2011/07/25</td>
-                            <td>$170,750</td>
-                        </tr>
-                        <tr>
-                            <td>Ashton Cox</td>
-                            <td>Junior Technical Author</td>
-                            <td>San Francisco</td>
-                            <td>66</td>
-                            <td>2009/01/12</td>
-                            <td>$86,000</td>
-                        </tr>
-                        <tr>
-                            <td>Cedric Kelly</td>
-                            <td>Senior Javascript Developer</td>
-                            <td>Edinburgh</td>
-                            <td>22</td>
-                            <td>2012/03/29</td>
-                            <td>$433,060</td>
-                        </tr>
-                        <tr>
-                            <td>Airi Satou</td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>33</td>
-                            <td>2008/11/28</td>
-                            <td>$162,700</td>
-                        </tr>
-                        <tr>
-                            <td>Cedric Kelly</td>
-                            <td>Senior Javascript Developer</td>
-                            <td>Edinburgh</td>
-                            <td>22</td>
-                            <td>2012/03/29</td>
-                            <td>$433,060</td>
-                        </tr>
-                        <tr>
-                            <td>Airi Satou</td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>33</td>
-                            <td>2008/11/28</td>
-                            <td>$162,700</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div> --}}
         </div>
     </div>
 </main>
