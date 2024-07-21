@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('kategori_id');  // Foreign key referencing 'id' in 'kategori_kegiatan' table
             $table->string('gambar')->nullable();  // Optional gambar field
             $table->text('keterangan');  // Keterangan field
+            $table->enum('semester',['ganjil','genap']);
             $table->timestamps();  // Created at and updated at timestamps
 
             // Defining foreign key constraint

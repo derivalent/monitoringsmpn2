@@ -58,7 +58,7 @@ Route::get('/berita_admin', [BeritaController::class,'berita_admin']);
 
 Route::get('/monitoring_tanggungan_kinerja', [AdminController::class,'monitoring_tanggungan_kinerja']);
 
-Route::get('/monitoring_laporan_kegiatan', [AdminController::class,'monitoring_laporan_kegiatan']);
+// Route::get('/monitoring_laporan_kegiatan', [AdminController::class,'monitoring_laporan_kegiatan']);
 
 Route::get('/tanggungan_kinerja', [AdminController::class,'tanggungan_kinerja']);
 
@@ -82,8 +82,8 @@ Route::post('/laporan_kegiatan/store', [LaporanKegiatanController::class, 'store
 Route::get('/laporan_kegiatan/{id}/edit', [LaporanKegiatanController::class, 'edit'])->name('LaporanKegiatan.edit');
 Route::put('/laporan_kegiatan/{id}', [LaporanKegiatanController::class, 'update'])->name('LaporanKegiatan.update');
 Route::delete('/laporan_kegiatan/{id}', [LaporanKegiatanController::class, 'destroy'])->name('LaporanKegiatan.destroy');
-
-
+//Monitoring Laporan Kegiatan
+Route::get('/monitoring_laporan_kegiatan', [LaporanKegiatanController::class,'monitoring_laporan_kegiatan']);
 
 //Kategori Kegiatan
 Route::get('/kategori_kegiatan', [KategoriKegiatanController::class,'index'])->name('KategoriKegiatan.index');

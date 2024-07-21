@@ -76,9 +76,7 @@
                             <th>Kategori</th>
                             <th>Gambar</th>
                             <th>Keterangan</th>
-                            {{-- <th>Status</th> --}}
-                            {{-- <th>Catatan</th> --}}
-                            {{-- <th>Aksi</th> --}}
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tfoot class="tampilantabel">
@@ -88,13 +86,30 @@
                             <th>Kategori</th>
                             <th>File</th>
                             <th>Keterangan</th>
-                            {{-- <th>Status</th> --}}
-                            {{-- <th>Catatan</th> --}}
-                            {{-- <th>Aksi</th> --}}
+                            <th>Aksi</th>
                         </tr>
                     </tfoot>
                     <tbody>
+                        @foreach ($laporanKegiatan as $lk)
                         <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $lk->nama }}</td>
+                            <td>{{ $lk->kategori->kategori_kegiatan }}</td>
+                            <td>
+                                <img src="{{ asset('images/' . $lk->gambar) }}" alt="Gambar" style="width: 100px; cursor: pointer;" onclick="openImageModal('path/to/image.jpg')">
+                            </td>
+                            <td class="isi-konten">{{ $lk->keterangan }}</td>
+                            <td>
+                                <a href="{{ route('LaporanKegiatan.edit', $lk->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                <form action="{{ route('LaporanKegiatan.destroy', $lk->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                        {{-- <tr>
                             <td>1</td>
                             <td>Laporan Mengajar hari 1,2,3</td>
                             <td>Kategori Contoh</td>
@@ -102,12 +117,12 @@
                                 <img src="images/damkarbwi.jpg" alt="Gambar" style="width: 100px; cursor: pointer;" onclick="openImageModal('path/to/image.jpg')">
                             </td>
                             <td class="isi-konten">Isi contoh konten yang panjang...</td>
-                            {{-- <td>
+                            <td>
                             <button class="btn btn-warning btn-sm" onclick="editItem(this)">Edit</button>
                             <button class="btn btn-danger btn-sm" onclick="deleteItem(this)">Delete</button>
-                            </td> --}}
-                        </tr>
-                        <tr>
+                            </td>
+                        </tr> --}}
+                        {{-- <tr>
                             <td>2</td>
                             <td>Judul Contoh</td>
                             <td>Kategori Contoh</td>
@@ -115,11 +130,11 @@
                                 <img src="path/to/image.jpg" alt="Gambar" style="width: 100px; cursor: pointer;" onclick="openImageModal('path/to/image.jpg')">
                             </td>
                             <td class="isi-konten">Isi contoh konten yang panjang...</td>
-                            {{-- <td>
+                            <td>
                                 <button class="btn btn-warning btn-sm" onclick="editItem(this)">Edit</button>
                                 <button class="btn btn-danger btn-sm" onclick="deleteItem(this)">Delete</button>
-                            </td> --}}
-                        </tr>
+                            </td>
+                        </tr> --}}
                     </tbody>
                 </table>
             </div>

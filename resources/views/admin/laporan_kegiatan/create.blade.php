@@ -43,6 +43,14 @@
                         <label for="keterangan">Keterangan:</label>
                         <textarea name="keterangan" id="keterangan" class="form-control" rows="3" required></textarea>
                     </div>
+                    <div class="mb-3">
+                        <label for="semester" class="form-label">Semester:</label>
+                        <select class="form-control" id="status_pekerjaan" name="semester" required>
+                            <option value="">-Pilih Status-</option>
+                            <option value="ganjil">Semester Ganjil</option>
+                            <option value="genap">Semester Genap</option>
+                        </select>
+                    </div>
 
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <a href="{{ route('LaporanKegiatan.index') }}" class="btn btn-secondary">Cancel</a>

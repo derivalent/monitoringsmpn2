@@ -100,8 +100,12 @@
                             </td>
                             <td class="isi-konten">{{ $lk->keterangan }}</td>
                             <td>
-                            <button class="btn btn-warning btn-sm" onclick="editItem(this)">Edit</button>
-                            <button class="btn btn-danger btn-sm" onclick="deleteItem(this)">Delete</button>
+                                <a href="{{ route('LaporanKegiatan.edit', $lk->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                <form action="{{ route('LaporanKegiatan.destroy', $lk->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach

@@ -10,7 +10,7 @@ class LaporanKegiatan extends Model
     use HasFactory;
 
     protected $table = 'laporan_kegiatan';
-    protected $fillable = ['nama', 'kategori_id', 'gambar', 'keterangan'];
+    protected $fillable = ['nama', 'kategori_id', 'gambar', 'keterangan','semester'];
 
     public function kategori()
     {

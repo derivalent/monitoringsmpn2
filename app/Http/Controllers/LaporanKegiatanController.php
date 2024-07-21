@@ -30,6 +30,7 @@ class LaporanKegiatanController extends Controller
             'kategori_id' => 'required|exists:kategori_kegiatan,id', // Ubah 'kategori' menjadi 'kategori_id'
             'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'keterangan' => 'required|string',
+            'semester' => 'required|string',
         ]);
 
         // dd($validateData); // Cek apakah data sudah tervalidasi
@@ -44,6 +45,7 @@ class LaporanKegiatanController extends Controller
             'kategori_id' => $validateData['kategori_id'], // Sesuaikan dengan nama field di database
             'gambar' => $imageName,
             'keterangan' => $validateData['keterangan'],
+            'semester' => $validateData['semester'],
         ]);
 
         return redirect()->route('LaporanKegiatan.index')->with('success', 'Laporan Kegiatan added successfully.');
@@ -76,4 +78,48 @@ class LaporanKegiatanController extends Controller
     //     return redirect()->route('laporan-kegiatan.index')->with('success', 'Laporan Kegiatan added successfully.');
 
     // }
+
+    public function edit($id) {
+        $laporanKegiatan = LaporanKegiatan::findOrFail($id);
+        $kategoriKegiatan = KategoriKegiatan::all();
+        return view('admin.laporan_kegiatan.edit', compact('laporanKegiatan', 'kategoriKegiatan'));
+    }
+
+    public function update(Request $request, $id) {
+        $validateData = $request->validate([
+            'nama' => 'required|string',
+            'kategori_id' => 'required|exists:kategori_kegiatan,id',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'keterangan' => 'required|string',
+            'semester' => 'required|string',
+        ]);
+
+        $laporanKegiatan = LaporanKegiatan::findOrFail($id);
+
+        if ($request->hasFile('gambar')) {
+            $imageName = time() . '.' . $request->file('gambar')->extension();
+            $request->file('gambar')->move(public_path('images'), $imageName);
+            $laporanKegiatan->gambar = $imageName;
+        }
+
+        $laporanKegiatan->update([
+            'nama' => $validateData['nama'],
+            'kategori_id' => $validateData['kategori_id'],
+            'keterangan' => $validateData['keterangan'],
+            'semester' => $validateData['semester'],
+        ]);
+
+        return redirect()->route('LaporanKegiatan.index')->with('success', 'Laporan Kegiatan updated successfully.');
+    }
+
+    public function destroy($id) {
+        $laporanKegiatan = LaporanKegiatan::findOrFail($id);
+        $laporanKegiatan->delete();
+        return redirect()->route('LaporanKegiatan.index')->with('success', 'Laporan Kegiatan deleted successfully.');
+    }
+
+    public function monitoring_laporan_kegiatan() {
+        $laporanKegiatan = LaporanKegiatan::all();
+        return view('admin/monitoring_laporan_kegiatan',compact('laporanKegiatan'));
+    }
 }
