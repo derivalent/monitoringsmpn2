@@ -97,7 +97,7 @@
                                     <i class="fas fa-search"></i>
                                 </a>
                             </div>
-                            <a class="btn btn-success btn-sm" href="#">
+                            <a class="btn btn-success btn-sm" href="{{ route ('Berita.create') }}">
                                 <i class="fa fa-plus"></i> &nbsp;Tambah
                             </a>
                         </div>
@@ -131,33 +131,80 @@
                 </table>
             </div> --}}
             <div class="card-body">
-            <table id="example" class="table table-striped table-bordered" style="width:100%">
-                <thead>
-                    <tr class="tampilantabel">
-                        <th>No</th>
-                        <th>Judul</th>
-                        <th>Gambar</th>
-                        <th>Isi</th>
-                        <th>Button</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Contoh baris data -->
-                    <tr>
-                        <td class="tampilantabel">1</td>
-                        <td>Judul Contoh</td>
-                        <td><img src="path/to/image.jpg" alt="Gambar" style="width: 100px;"></td>
-                        <td class="isi-konten">Isi contoh sdjkbfgsjkgbkontennnnnnnnnnkjksjhdfsjakfbnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn.</td>
-                        <td class="tampilantabel">
-                            <button class="btn btn-primary btn-sm" onclick="editItem(this)">Edit</button>
-                            <button class="btn btn-danger btn-sm" onclick="deleteItem(this)">Delete</button>
-                        </td>
-                    </tr>
-                    <!-- Tambahkan baris data lainnya di sini -->
-                </tbody>
-            </table>
+                {{-- <table id="datatablesSimple" class="table table-striped table-bordered"> --}}
+                    <table id="datatablesSimple" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Judul</th>
+                            <th>Gambar</th>
+                            <th>Detail</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($berita as $key => $item)
+                        <tr>
+                            <td>{{ $key + 1 }}</td>
+                            <td>{{ $item->judul }}</td>
+                            <td><img src="{{ asset('images_berita/' . $item->gambar) }}" alt="{{ $item->judul }}" width="100"></td>
+                            {{-- <td>{{ $item->isi }}</td> --}}
+                            <td><a href="#" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#viewModal" data-gambar="{{ asset('images_berita/' . $item->gambar) }}" data-judul="{{ $item->judul }}" data-isi="{{ $item->isi }}"><i class="fas fa-eye"></i> Lihat</a></td>
+                            <td>
+                                <a href="{{ route('Berita.edit', $item->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                                <form action="{{ route('Berita.destroy', $item->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')"><i class="fas fa-trash"></i> Hapus</button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </main>
+
+<!-- Modal -->
+<div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewModalLabel">Detail Berita</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card mb-4">
+                    <img src="" id="modalGambar" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title" id="modalJudul"></h5>
+                        <p class="card-text" id="modalIsi"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var viewModal = document.getElementById('viewModal');
+    viewModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var gambar = button.getAttribute('data-gambar');
+        var judul = button.getAttribute('data-judul');
+        var isi = button.getAttribute('data-isi');
+
+        var modalGambar = viewModal.querySelector('#modalGambar');
+        var modalJudul = viewModal.querySelector('#modalJudul');
+        var modalIsi = viewModal.querySelector('#modalIsi');
+
+        modalGambar.src = gambar;
+        modalJudul.textContent = judul;
+        modalIsi.textContent = isi;
+    });
+});
+</script>
 @endsection

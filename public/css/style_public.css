@@ -88,7 +88,7 @@
 .card-img-top {
     width: 100%;
     /* Lebar maksimum */
-    height: 200px;
+    height: 325px;
     /* Tinggi tetap */
     object-fit: cover;
     /* Memastikan gambar terpotong atau memperluas sesuai proporsi yang ditetapkan */

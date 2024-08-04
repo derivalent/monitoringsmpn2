@@ -7,6 +7,7 @@
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Contact</a></li>
                     <li><a href="#">Berita</a></li>
+                    <li><a href="{{ route('Login') }}">Login</a></li>
                 </ul>
             </div>
             <div class="col-md-6 mb-3 contact-info">

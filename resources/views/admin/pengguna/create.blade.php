@@ -22,14 +22,32 @@
                         <label for="name" class="form-label">Nama :</label>
                         <input type="text" class="form-control" id="name" name="name" required>
                     </div>
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label for="jenis_kelamin" class="form-label">Jenis Kelamin :</label>
                         <select class="form-control" id="jenis_kelamin" name="jenis_kelamin" required>
                             <option value="">-Pilih Jenis Kelamin-</option>
                             <option value="pria">Pria</option>
                             <option value="wanita">Wanita</option>
                         </select>
+                    </div> --}}
+                    <div class="mb-3">
+                        <label class="form-label">Jenis Kelamin :</label>
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin_pria" value="pria" required>
+                                <label class="form-check-label" for="jenis_kelamin_pria">
+                                    Pria
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin_wanita" value="wanita" required>
+                                <label class="form-check-label" for="jenis_kelamin_wanita">
+                                    Wanita
+                                </label>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="mb-3">
                         <label for="tempat_lahir" class="form-label">Tempat Lahir :</label>
                         <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" required>

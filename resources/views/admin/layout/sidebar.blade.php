@@ -8,7 +8,7 @@
                     Dashboard
                 </a>
                 <div class="sb-sidenav-menu-heading">Konten</div>
-                <a class="nav-link" href="{{ 'berita_admin' }}">
+                <a class="nav-link" href="{{ route('Berita.index') }}">
                     <div class="sb-nav-link-icon"><i class="fa-regular fa-newspaper"></i></div>
                     Berita
                 </a>
@@ -60,14 +60,22 @@
                     Tables
                 </a> --}}
                 <a class="nav-link" href="{{ route('kelola_pengguna') }}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
                     Kelola Pengguna
                 </a>
             </div>
         </div>
-        <div class="sb-sidenav-footer">
+        {{-- <div class="sb-sidenav-footer">
             <div class="small">Logged in as:</div>
             Start Bootstrap
+        </div> --}}
+        <div class="sb-sidenav-footer">
+            <form method="POST" action="{{ route('Logout') }}">
+                @csrf
+                <button type="submit" class="nav-link btn btn-link">
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-right-from-bracket"></i> Logout</div>
+                </button>
+            </form>
         </div>
     </nav>
 </div>

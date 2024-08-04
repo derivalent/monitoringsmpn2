@@ -123,6 +123,21 @@ th, .tampilantabel {
     text-overflow: ellipsis; /* Tambahkan "..." di akhir teks yang terpotong */
 }
 
+/**/
+#modalGambar {
+    width: 100%;
+    height: auto;
+    max-width: 300px; /* Atur ukuran maksimal gambar */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#modalJudul {
+    font-weight: bold;
+}
+/**/
+
 /*status kategori*/
 .status-selesai {
     display: inline-block;

@@ -1,43 +1,43 @@
 //js berita//
 // Data card berita yang akan ditampilkan
-var cards = [{
-        imageUrl: 'images/logo_damkar_resize.png',
-        title: 'Penginapan',
-        description: 'Penginapan yang disediakan pada hotel aston terbagi sesuai tipe kamar dan terdapat tipe tempat tidur yang bisa dipilih oleh pemesan.',
-        link: 'penginapan.php'
-    },
-    {
-        imageUrl: 'images/logo_kab_banyuwangi.png',
-        title: 'Sewa Ruangan',
-        description: 'Ruangan dapat disewa pada hotel aston seperti Balriim untuk kegiatan, terdadpat area kolah ataupun beberapa tempat lainnya yang ocok digunakan untuk kegiatan acara.',
-        link: 'sewaruangan.php'
-    },
-    {
-        imageUrl: 'images/logo_damkar.png',
-        title: 'Restoran',
-        description: 'This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.',
-        link: 'restoran.php'
-    },
-    {
-        imageUrl: 'images/logo_damkar.png',
-        title: 'Restoran',
-        description: 'This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.',
-        link: 'restoran.php'
-    },
-    {
-        imageUrl: 'images/logo_damkar.png',
-        title: 'Restoran',
-        description: 'This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.',
-        link: 'restoran.php'
-    },
-    {
-        imageUrl: 'images/logo_damkar.png',
-        title: 'Restoran',
-        description: 'This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.',
-        link: 'restoran.php'
-    }
+// var cards = [{
+//         imageUrl: 'images/logo_damkar_resize.png',
+//         title: 'Penginapan',
+//         description: 'Penginapan yang disediakan pada hotel aston terbagi sesuai tipe kamar dan terdapat tipe tempat tidur yang bisa dipilih oleh pemesan.',
+//         link: 'penginapan.php'
+//     },
+//     {
+//         imageUrl: 'images/logo_kab_banyuwangi.png',
+//         title: 'Sewa Ruangan',
+//         description: 'Ruangan dapat disewa pada hotel aston seperti Balriim untuk kegiatan, terdadpat area kolah ataupun beberapa tempat lainnya yang ocok digunakan untuk kegiatan acara.',
+//         link: 'sewaruangan.php'
+//     },
+//     {
+//         imageUrl: 'images/logo_damkar.png',
+//         title: 'Restoran',
+//         description: 'This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.',
+//         link: 'restoran.php'
+//     },
+//     {
+//         imageUrl: 'images/logo_damkar.png',
+//         title: 'Restoran',
+//         description: 'This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.',
+//         link: 'restoran.php'
+//     },
+//     {
+//         imageUrl: 'images/logo_damkar.png',
+//         title: 'Restoran',
+//         description: 'This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.',
+//         link: 'restoran.php'
+//     },
+//     {
+//         imageUrl: 'images/logo_damkar.png',
+//         title: 'Restoran',
+//         description: 'This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.',
+//         link: 'restoran.php'
+//     }
 
-];
+// ];
 
 // Fungsi untuk menampilkan card pada halaman tertentu
 function displayCards(page) {

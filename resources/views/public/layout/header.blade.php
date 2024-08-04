@@ -16,13 +16,13 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="dashboard">Beranda</a>
+                    <a class="nav-link" href="{{ route('Beranda') }}">Beranda</a>
                 </li>
                 {{-- <li class="nav-item">
                     <a class="nav-link" href="information">Tentang Damkarmat</a>
                 </li> --}}
                 <li class="nav-item">
-                    <a class="nav-link" href="berita_public">Berita</a>
+                    <a class="nav-link" href="{{ route('BeritaPublic') }}">Berita</a>
                 </li>
                 <!-- Tambahkan menu sesuai kebutuhan -->
             </ul>

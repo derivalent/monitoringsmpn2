@@ -70,3 +70,10 @@ dibuat dengan bootsrap 5.3.0
 
 # Admin side
 dibuat dari template start-botstrap dengan menambahkan cdn fontawasome, cdn data table simple dan cdn CKeditor
+
+# Untuk penggunaan
+1. sesuaikan database dan port yang digunakan 
+2. Lakukan "php artisan migrate" untuk merelasikan tabel dengan database yang telah ditentukan
+3. Lakukan "php artisan db:seed --class=RoleSeeder" untuk mengintruksikan injeksi data pada RoleSeeder
+4. Lakukan "php artisan db:seed --class=UserSeeder" untuk injeksi data user pada UserSeeder
+5. Lakukan "php artisan serve" untuk menjalankan server lokal pada device yang digunakan

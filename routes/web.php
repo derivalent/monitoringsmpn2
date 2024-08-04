@@ -8,8 +8,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\KategoriKegiatanController;
 use App\Http\Controllers\LaporanKegiatanController;
 use App\Http\Controllers\UserController;
-use App\Models\KategoriKegiatan;
 use App\Http\Controllers\TahunController;
+use App\Http\Controllers\LoginController;
+// use App\Http\Controllers\TanggunganKinerjaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,21 +32,42 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     // return view('welcome');
     return view('public/dashboard');
-});
+})->name('Beranda');
+
+// Berita Public
+// // Route::get('/berita_isi_public', [BeritaController::class,'berita_isi_public']);
+// Route::get('/berita_public', [PublicController::class,'berita_public'])->name('BeritaPublic');
+// Route::get('/berita_isi_public', [PublicController::class,'berita_isi_public'])->name('BeritaIsiPublic');
+// // Route::get('/berita_isi_public/{id}', [PublicController::class,'berita_isi_public'])->name('BeritaIsiPublic');
+
+Route::get('/berita_public', [PublicController::class, 'berita_public'])->name('BeritaPublic');
+Route::get('/berita_isi_public/{id}', [PublicController::class, 'berita_isi_public'])->name('BeritaIsiPublic');
+
+
+
+
+
+
 
 // Route::get('/information', function () {
 //     return view('public.information');
 // });
 
-Route::get('/berita_public', function () {
-    return view('public.berita_public');
-});
+// Route::get('/berita_public', function () {
+//     return view('public.berita_public');
+// });
 
-Route::get('/berita_isi_public', [PublicController::class,'berita_isi_public']);
+// Route::get('/berita_isi_public', [PublicController::class,'berita_isi_public'])->name('BeritaIsiPublic');
 
 // Route::get('/berita_isi_public', [BeritaController::class, 'show_berita'])->name('berita.isi');
 
 // Route::get('/berita_isi_public', [BeritaController::class,'show_berita']);
+
+
+//login
+Route::get('/login', [LoginController::class, 'index'])->name('Login');
+Route::post('/login_proses', [LoginController::class, 'login_proses'])->name('LoginProses');
+Route::post('/logout', [LoginController::class, 'logout'])->name('Logout');
 
 
 
@@ -54,7 +76,7 @@ Route::get('/berita_isi_public', [PublicController::class,'berita_isi_public']);
 //  Route::get('/dashboard_admin', [AdminController::class,'dashboard_admin']);
 Route::get('/dashboard_admin', [KategoriKegiatanController::class,'index'])->name('KategoriKegiatan.index');
 
-Route::get('/berita_admin', [BeritaController::class,'berita_admin']);
+// Route::get('/berita_admin', [BeritaController::class,'berita_admin']);
 
 Route::get('/monitoring_tanggungan_kinerja', [AdminController::class,'monitoring_tanggungan_kinerja']);
 
@@ -101,4 +123,25 @@ Route::get('/tahun/{id}/edit', [TahunController::class, 'edit'])->name('Tahun.ed
 Route::put('/tahun/{id}', [TahunController::class, 'update'])->name('Tahun.update');
 Route::delete('/tahun/{id}', [TahunController::class, 'destroy'])->name('Tahun.destroy');
 
-//
+//CRUD Berita
+Route::get('/berita', [BeritaController::class,'index'])->name('Berita.index');
+Route::get('/berita/create', [BeritaController::class,'create'])->name('Berita.create');
+Route::post('/berita/store', [BeritaController::class, 'store'])->name('Berita.store');
+Route::get('/berita/{id}/edit', [BeritaController::class, 'edit'])->name('Berita.edit');
+Route::put('/berita/{id}', [BeritaController::class, 'update'])->name('Berita.update');
+Route::delete('/berita/{id}', [BeritaController::class, 'destroy'])->name('Berita.destroy');
+
+// // Berita Public
+// // Route::get('/berita_isi_public', [BeritaController::class,'berita_isi_public']);
+// Route::get('/berita_public', [PublicController::class,'berita_public'])->name('BeritaPublic');
+// Route::get('/berita_isi_public', [PublicController::class,'berita_isi_public'])->name('BeritaIsiPublic');
+
+
+//CRUD Tanggungan Kinerja
+// Route::get('/tanggungan_kinerja', [TanggunganKinerjaController::class,'index'])->name('TanggunganKinerja.index');
+// Route::get('/tanggungan_kinerja/create', [TanggunganKinerjaController::class,'create'])->name('TanggunganKinerja.create');
+// Route::post('/tanggungan_kinerja/store', [TanggunganKinerjaController::class, 'store'])->name('TanggunganKinerja.store');
+// Route::get('/tanggungan_kinerja/{id}/edit', [TanggunganKinerjaController::class, 'edit'])->name('TanggunganKinerja.edit');
+// Route::put('/tanggungan_kinerja/{id}', [TanggunganKinerjaController::class, 'update'])->name('TanggunganKinerja.update');
+// Route::delete('/tanggungan_kinerja/{id}', [TanggunganKinerjaController::class, 'destroy'])->name('TanggunganKinerja.destroy');
+

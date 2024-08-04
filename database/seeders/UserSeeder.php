@@ -22,11 +22,11 @@ class UserSeeder extends Seeder
             'jabatan' => 'Creator',
             'jenis_kelamin' => 'pria',
             'tempat_lahir' => 'Banyuwangi',
-            'tanggal_lahir' => null, // Set to null if not available
+            'tanggal_lahir' => '2024-07-27', // Set to null if not available
             'pendidikan_terakhir' => 'D4 TRPL',
             'bidang_studi' => 'TI',
             'status_pekerjaan' => 'pns', // Updated to match the new enum values
-            'role' => 'super admin',
+            'role' => '1',
             'alamat' => 'Banyuwangi',
         ]);
     }

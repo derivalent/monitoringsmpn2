@@ -25,11 +25,11 @@ window.addEventListener('DOMContentLoaded', event => {
 
 });
 
-$(document).ready(function() {
-    $('#example').DataTable({
-        "order": [[0, "desc"]] // Column index 0 (first column) with descending order
-    });
-});
+// $(document).ready(function() {
+//     $('#example').DataTable({
+//         "order": [[0, "desc"]] // Column index 0 (first column) with descending order
+//     });
+// });
 
 function openPdf(event, url) {
     event.preventDefault();
@@ -43,9 +43,9 @@ function openImageModal(src) {
     myModal.show();
 }
 
-CKEDITOR.replace('isi');
+// CKEDITOR.replace('isi');
 
-// Set timeout untuk menghilangkan alert setelah 2 detik
-setTimeout(function() {
-    $('#success-alert').fadeOut('fast');
-}, 2000); // 2000 milidetik = 2 detik
+// // Set timeout untuk menghilangkan alert setelah 2 detik
+// setTimeout(function() {
+//     $('#success-alert').fadeOut('fast');
+// }, 2000); // 2000 milidetik = 2 detik

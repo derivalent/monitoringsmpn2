@@ -122,76 +122,12 @@
             </div>
         </div>
     </div> <br>
-
-    {{-- <div class="row">
-    <div class="col-md-7 mt-4 mb-4" style="height: 350px;">
-        <div class="card h-100">
-            <div class="card-body">
-                <iframe src="https://spm.banyuwangikab.go.id/skpd/dinas-pemadam-kebakaran-dan-penyelamatan" style="width: 100%; height: 100%; border: none;"></iframe>
-            </div>
-        </div>
-    </div>
-    <!-- Maps -->
-    <div class="col-md-5 mt-4 mb-4" style="height: 350px;">
-        <div id="map" style="width: 100%; height: 100%; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"></div>
-        <script>
-
-            //Tampilan Maps
-            const map = L.map('map').setView([-8.234256388870639, 114.29139328370496], 9);
-            const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-               attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            }).addTo(map);
-
-            //Marker
-            //Lokasi 1
-            var lokasi1 = L.icon({
-               iconUrl: 'images/logo_damkar.png',
-               iconSize: [65, 40], // size of the icon
-            });
-
-            L.marker([-8.21124339808114, 114.37976274943635], { icon: lokasi1 }).addTo(map).bindPopup("<b>MAKO DAMKAR BANYUWANGI</b><br>Telp: (0333) 422113").openPopup();
-
-            //Lokasi 2
-            var lokasi2 = L.icon({
-               iconUrl: 'images/logo_damkar.png',
-               iconSize: [65, 40], // size of the icon
-            });
-
-            L.marker([-8.397562413652105, 114.26973405885026], { icon: lokasi2 }).addTo(map).bindPopup("<b>SEKTOR SRONO</b><br>Srono")
-
-            //Lokasi 3
-            var lokasi3 = L.icon({
-               iconUrl: 'images/logo_damkar.png',
-               iconSize: [65, 40], // size of the icon
-            });
-
-            L.marker([-8.361345425593777, 114.15939366898164], { icon: lokasi3 }).addTo(map).bindPopup("<b>SEKTOR GENTENG</b><br>Genteng")
-
-            //Lokasi 4
-            var lokasi4 = L.icon({
-               iconUrl: 'images/logo_damkar.png',
-               iconSize: [65, 40], // size of the icon
-            });
-
-            L.marker([-8.48352765424662, 114.13341408000693], { icon: lokasi4 }).addTo(map).bindPopup("<b>SEKTOR BANGOREJO</b><br>Bangorejo")
-
-            //Tampilan Maps Shareloc
-            const maps = L.map('map2').setView([-8.234256388870639, 114.29139328370496], 9);
-            const tile = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-               attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            }).addTo(map);
-
-            //Lokasi 3
-            var sharel = L.icon({
-                iconUrl: './assets/image/logo_damkar.png',
-                iconSize:     [65, 40], // size of the icon
-                });
-
-             L.marker([-8.361345425593777, 114.15939366898164],{icon:lokasi3}).addTo(map).bindPopup("<b>SEKTOR GENTENG</b><br>Genteng")
-
-         </script>
-         </div>
-    </div> --}}
-
   </main>
+  <script>
+       @if ($massage = Session::get('success'))
+        <script>
+             Swal.fire('{{ $massage }}');
+        </script>
+    @endif
+  </script>
 @endsection

@@ -29,10 +29,44 @@
             <label for="email">Email</label>
             <input type="email" class="form-control" id="email" name="email" value="{{ old('email', $user->email) }}">
         </div>
-        <div class="form-group">
+        {{-- <div class="form-group">
             <label for="jenis_kelamin">Jenis Kelamin</label>
             <input type="text" class="form-control" id="jenis_kelamin" name="jenis_kelamin" value="{{ old('jenis_kelamin', $user->jenis_kelamin) }}">
+        </div> --}}
+        <div class="mb-3">
+            <label class="form-label">Jenis Kelamin :</label>
+            <div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin_pria" value="pria" required {{ old('jenis_kelamin', $user->jenis_kelamin) == 'pria' ? 'checked' : '' }}>
+                    <label class="form-check-label" for="jenis_kelamin_pria">
+                        Pria
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin_wanita" value="wanita" required {{ old('jenis_kelamin', $user->jenis_kelamin) == 'wanita' ? 'checked' : '' }}>
+                    <label class="form-check-label" for="jenis_kelamin_wanita">
+                        Wanita
+                    </label>
+                </div>
+            </div>
         </div>
+        {{-- <div class="mb-3">
+            <label class="form-label">Jenis Kelamin :</label>
+            <div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin_pria" value="pria" required {{ $jenis_kelamin == 'pria' ? 'checked' : '' }}>
+                    <label class="form-check-label" for="jenis_kelamin_pria">
+                        Pria
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin_wanita" value="wanita" required {{ $jenis_kelamin == 'wanita' ? 'checked' : '' }}>
+                    <label class="form-check-label" for="jenis_kelamin_wanita">
+                        Wanita
+                    </label>
+                </div>
+            </div>
+        </div> --}}
         <div class="form-group">
             <label for="tempat_lahir">Tempat Lahir</label>
             <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" value="{{ old('tempat_lahir', $user->tempat_lahir) }}">
