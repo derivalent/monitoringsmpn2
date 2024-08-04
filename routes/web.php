@@ -43,12 +43,6 @@ Route::get('/dashboard', function () {
 Route::get('/berita_public', [PublicController::class, 'berita_public'])->name('BeritaPublic');
 Route::get('/berita_isi_public/{id}', [PublicController::class, 'berita_isi_public'])->name('BeritaIsiPublic');
 
-
-
-
-
-
-
 // Route::get('/information', function () {
 //     return view('public.information');
 // });
@@ -57,19 +51,14 @@ Route::get('/berita_isi_public/{id}', [PublicController::class, 'berita_isi_publ
 //     return view('public.berita_public');
 // });
 
-// Route::get('/berita_isi_public', [PublicController::class,'berita_isi_public'])->name('BeritaIsiPublic');
-
-// Route::get('/berita_isi_public', [BeritaController::class, 'show_berita'])->name('berita.isi');
-
-// Route::get('/berita_isi_public', [BeritaController::class,'show_berita']);
-
-
 //login
 Route::get('/login', [LoginController::class, 'index'])->name('Login');
 Route::post('/login_proses', [LoginController::class, 'login_proses'])->name('LoginProses');
 Route::post('/logout', [LoginController::class, 'logout'])->name('Logout');
 
+// Route::group(['prefix' => 'admin','middlware' => ['auth'], 'as' => 'admin.'] , function() {
 
+// });
 
 
 //admin
@@ -86,56 +75,99 @@ Route::get('/tanggungan_kinerja', [AdminController::class,'tanggungan_kinerja'])
 
 // Route::get('/laporan_kegiatan', [AdminController::class,'laporan_kegiatan']);
 
-
-//kelola pengguna
-// Route::get('/kelola_pengguna', [AdminController::class,'kelola_pengguna']);
-Route::get('/kelola_pengguna', [UserController::class,'kelola_pengguna'])->name('kelola_pengguna');
-Route::get('/kelola_pengguna/create', [UserController::class,'create'])->name('kelola_pengguna.create');
-Route::post('/admin/pengguna/store', [UserController::class, 'store'])->name('user.store');
-Route::get('/kelola_pengguna/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
-Route::put('/kelola_pengguna/{id}', [UserController::class, 'update'])->name('user.update');
-Route::delete('/kelola_pengguna/{id}', [UserController::class, 'destroy'])->name('user.destroy');
-
-//Laporan Kegiatan
-// Route::get('/laporan_kegiatan', [LaporanKegiatanController::class,'index']);
-Route::get('/laporan_kegiatan', [LaporanKegiatanController::class,'index'])->name('LaporanKegiatan.index');
-Route::get('/laporan_kegiatan/create', [LaporanKegiatanController::class,'create'])->name('LaporanKegiatan.create');
-Route::post('/laporan_kegiatan/store', [LaporanKegiatanController::class, 'store'])->name('LaporanKegiatan.store');
-Route::get('/laporan_kegiatan/{id}/edit', [LaporanKegiatanController::class, 'edit'])->name('LaporanKegiatan.edit');
-Route::put('/laporan_kegiatan/{id}', [LaporanKegiatanController::class, 'update'])->name('LaporanKegiatan.update');
-Route::delete('/laporan_kegiatan/{id}', [LaporanKegiatanController::class, 'destroy'])->name('LaporanKegiatan.destroy');
-//Monitoring Laporan Kegiatan
-Route::get('/monitoring_laporan_kegiatan', [LaporanKegiatanController::class,'monitoring_laporan_kegiatan']);
-
-//Kategori Kegiatan
-Route::get('/kategori_kegiatan', [KategoriKegiatanController::class,'index'])->name('KategoriKegiatan.index');
-Route::get('/kategori_kegiatan/create', [KategoriKegiatanController::class,'create'])->name('KategoriKegiatan.create');
-Route::post('/kategori_kegiatan/store', [KategoriKegiatanController::class, 'store'])->name('KategoriKegiatan.store');
-Route::get('/kategori_kegiatan/{id}/edit', [KategoriKegiatanController::class, 'edit'])->name('KategoriKegiatan.edit');
-Route::put('/kategori_kegiatan/{id}', [KategoriKegiatanController::class, 'update'])->name('KategoriKegiatan.update');
-Route::delete('/kategori_kegiatan/{id}', [KategoriKegiatanController::class, 'destroy'])->name('KategoriKegiatan.destroy');
-
-//CRUD Tabel Tahun
-Route::get('/tahun', [TahunController::class,'index'])->name('Tahun.index');
-Route::get('/tahun/create', [TahunController::class,'create'])->name('Tahun.create');
-Route::post('/tahun/store', [TahunController::class, 'store'])->name('Tahun.store');
-Route::get('/tahun/{id}/edit', [TahunController::class, 'edit'])->name('Tahun.edit');
-Route::put('/tahun/{id}', [TahunController::class, 'update'])->name('Tahun.update');
-Route::delete('/tahun/{id}', [TahunController::class, 'destroy'])->name('Tahun.destroy');
-
-//CRUD Berita
-Route::get('/berita', [BeritaController::class,'index'])->name('Berita.index');
-Route::get('/berita/create', [BeritaController::class,'create'])->name('Berita.create');
-Route::post('/berita/store', [BeritaController::class, 'store'])->name('Berita.store');
-Route::get('/berita/{id}/edit', [BeritaController::class, 'edit'])->name('Berita.edit');
-Route::put('/berita/{id}', [BeritaController::class, 'update'])->name('Berita.update');
-Route::delete('/berita/{id}', [BeritaController::class, 'destroy'])->name('Berita.destroy');
-
 // // Berita Public
 // // Route::get('/berita_isi_public', [BeritaController::class,'berita_isi_public']);
 // Route::get('/berita_public', [PublicController::class,'berita_public'])->name('BeritaPublic');
 // Route::get('/berita_isi_public', [PublicController::class,'berita_isi_public'])->name('BeritaIsiPublic');
 
+
+Route::group(['prefix' => 'admin','middlware' => ['auth']] , function() {
+    //kelola pengguna
+    Route::get('/kelola_pengguna', [UserController::class,'kelola_pengguna'])->name('kelola_pengguna');
+    Route::get('/kelola_pengguna/create', [UserController::class,'create'])->name('kelola_pengguna.create');
+    Route::post('/admin/pengguna/store', [UserController::class, 'store'])->name('user.store');
+    Route::get('/kelola_pengguna/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('/kelola_pengguna/{id}', [UserController::class, 'update'])->name('user.update');
+    Route::delete('/kelola_pengguna/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+
+    //Laporan Kegiatan
+    Route::get('/laporan_kegiatan', [LaporanKegiatanController::class,'index'])->name('LaporanKegiatan.index');
+    Route::get('/laporan_kegiatan/create', [LaporanKegiatanController::class,'create'])->name('LaporanKegiatan.create');
+    Route::post('/laporan_kegiatan/store', [LaporanKegiatanController::class, 'store'])->name('LaporanKegiatan.store');
+    Route::get('/laporan_kegiatan/{id}/edit', [LaporanKegiatanController::class, 'edit'])->name('LaporanKegiatan.edit');
+    Route::put('/laporan_kegiatan/{id}', [LaporanKegiatanController::class, 'update'])->name('LaporanKegiatan.update');
+    Route::delete('/laporan_kegiatan/{id}', [LaporanKegiatanController::class, 'destroy'])->name('LaporanKegiatan.destroy');
+    //Monitoring Laporan Kegiatan
+    Route::get('/monitoring_laporan_kegiatan', [LaporanKegiatanController::class,'monitoring_laporan_kegiatan']);
+
+    //Kategori Kegiatan
+    Route::get('/kategori_kegiatan', [KategoriKegiatanController::class,'index'])->name('KategoriKegiatan.index');
+    Route::get('/kategori_kegiatan/create', [KategoriKegiatanController::class,'create'])->name('KategoriKegiatan.create');
+    Route::post('/kategori_kegiatan/store', [KategoriKegiatanController::class, 'store'])->name('KategoriKegiatan.store');
+    Route::get('/kategori_kegiatan/{id}/edit', [KategoriKegiatanController::class, 'edit'])->name('KategoriKegiatan.edit');
+    Route::put('/kategori_kegiatan/{id}', [KategoriKegiatanController::class, 'update'])->name('KategoriKegiatan.update');
+    Route::delete('/kategori_kegiatan/{id}', [KategoriKegiatanController::class, 'destroy'])->name('KategoriKegiatan.destroy');
+
+    //CRUD Tabel Tahun
+    Route::get('/tahun', [TahunController::class,'index'])->name('Tahun.index');
+    Route::get('/tahun/create', [TahunController::class,'create'])->name('Tahun.create');
+    Route::post('/tahun/store', [TahunController::class, 'store'])->name('Tahun.store');
+    Route::get('/tahun/{id}/edit', [TahunController::class, 'edit'])->name('Tahun.edit');
+    Route::put('/tahun/{id}', [TahunController::class, 'update'])->name('Tahun.update');
+    Route::delete('/tahun/{id}', [TahunController::class, 'destroy'])->name('Tahun.destroy');
+
+    //CRUD Berita
+    Route::get('/berita', [BeritaController::class,'index'])->name('Berita.index');
+    Route::get('/berita/create', [BeritaController::class,'create'])->name('Berita.create');
+    Route::post('/berita/store', [BeritaController::class, 'store'])->name('Berita.store');
+    Route::get('/berita/{id}/edit', [BeritaController::class, 'edit'])->name('Berita.edit');
+    Route::put('/berita/{id}', [BeritaController::class, 'update'])->name('Berita.update');
+    Route::delete('/berita/{id}', [BeritaController::class, 'destroy'])->name('Berita.destroy');
+});
+
+
+
+//kelola pengguna
+// Route::get('/kelola_pengguna', [UserController::class,'kelola_pengguna'])->name('kelola_pengguna');
+// Route::get('/kelola_pengguna/create', [UserController::class,'create'])->name('kelola_pengguna.create');
+// Route::post('/admin/pengguna/store', [UserController::class, 'store'])->name('user.store');
+// Route::get('/kelola_pengguna/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+// Route::put('/kelola_pengguna/{id}', [UserController::class, 'update'])->name('user.update');
+// Route::delete('/kelola_pengguna/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+
+// //Laporan Kegiatan
+// Route::get('/laporan_kegiatan', [LaporanKegiatanController::class,'index'])->name('LaporanKegiatan.index');
+// Route::get('/laporan_kegiatan/create', [LaporanKegiatanController::class,'create'])->name('LaporanKegiatan.create');
+// Route::post('/laporan_kegiatan/store', [LaporanKegiatanController::class, 'store'])->name('LaporanKegiatan.store');
+// Route::get('/laporan_kegiatan/{id}/edit', [LaporanKegiatanController::class, 'edit'])->name('LaporanKegiatan.edit');
+// Route::put('/laporan_kegiatan/{id}', [LaporanKegiatanController::class, 'update'])->name('LaporanKegiatan.update');
+// Route::delete('/laporan_kegiatan/{id}', [LaporanKegiatanController::class, 'destroy'])->name('LaporanKegiatan.destroy');
+// //Monitoring Laporan Kegiatan
+// Route::get('/monitoring_laporan_kegiatan', [LaporanKegiatanController::class,'monitoring_laporan_kegiatan']);
+
+// //Kategori Kegiatan
+// Route::get('/kategori_kegiatan', [KategoriKegiatanController::class,'index'])->name('KategoriKegiatan.index');
+// Route::get('/kategori_kegiatan/create', [KategoriKegiatanController::class,'create'])->name('KategoriKegiatan.create');
+// Route::post('/kategori_kegiatan/store', [KategoriKegiatanController::class, 'store'])->name('KategoriKegiatan.store');
+// Route::get('/kategori_kegiatan/{id}/edit', [KategoriKegiatanController::class, 'edit'])->name('KategoriKegiatan.edit');
+// Route::put('/kategori_kegiatan/{id}', [KategoriKegiatanController::class, 'update'])->name('KategoriKegiatan.update');
+// Route::delete('/kategori_kegiatan/{id}', [KategoriKegiatanController::class, 'destroy'])->name('KategoriKegiatan.destroy');
+
+// //CRUD Tabel Tahun
+// Route::get('/tahun', [TahunController::class,'index'])->name('Tahun.index');
+// Route::get('/tahun/create', [TahunController::class,'create'])->name('Tahun.create');
+// Route::post('/tahun/store', [TahunController::class, 'store'])->name('Tahun.store');
+// Route::get('/tahun/{id}/edit', [TahunController::class, 'edit'])->name('Tahun.edit');
+// Route::put('/tahun/{id}', [TahunController::class, 'update'])->name('Tahun.update');
+// Route::delete('/tahun/{id}', [TahunController::class, 'destroy'])->name('Tahun.destroy');
+
+// //CRUD Berita
+// Route::get('/berita', [BeritaController::class,'index'])->name('Berita.index');
+// Route::get('/berita/create', [BeritaController::class,'create'])->name('Berita.create');
+// Route::post('/berita/store', [BeritaController::class, 'store'])->name('Berita.store');
+// Route::get('/berita/{id}/edit', [BeritaController::class, 'edit'])->name('Berita.edit');
+// Route::put('/berita/{id}', [BeritaController::class, 'update'])->name('Berita.update');
+// Route::delete('/berita/{id}', [BeritaController::class, 'destroy'])->name('Berita.destroy');
 
 //CRUD Tanggungan Kinerja
 // Route::get('/tanggungan_kinerja', [TanggunganKinerjaController::class,'index'])->name('TanggunganKinerja.index');
