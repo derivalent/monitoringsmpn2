@@ -30,11 +30,16 @@ class BeritaController extends Controller
             'gambar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'isi' => 'required|string',
         ]);
+        // dd($validatedData);
 
         // Save Image
         $imageName = time() . '.' . $request->file('gambar')->extension();
         $request->file('gambar')->move(public_path('images_berita'), $imageName);
+        // $imageName = time() . '.' . $request->file('gambar')->extension();
+        // $request->file('gambar')->move(public_path('images_berita'), $imageName);
         // dd($validatedData);
+
+
         Berita::create([
             'judul' => $validatedData['judul'],
             'gambar' => $imageName,

@@ -91,13 +91,6 @@
 </script>
 @endsection --}}
 
-
-
-
-
-
-
-
 @extends('admin.layout.main')
 @section('content')
     <main>
@@ -134,7 +127,7 @@
         </div>
     </main>
 @endsection
-{{-- 
+{{--
 @section('scripts')
     <!-- CKEditor CDN -->
     <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
