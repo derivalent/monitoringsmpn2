@@ -3,81 +3,48 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Tahun;
 use App\Models\KategoriKegiatan;
 use App\Models\LaporanKegiatan;
 
 class LaporanKegiatanController extends Controller
 {
-
     public function index() {
-
         $laporanKegiatan = LaporanKegiatan::all();
         $kategoriKegiatan = KategoriKegiatan::all();
-        return view('admin.laporan_kegiatan.index',compact('kategoriKegiatan','laporanKegiatan'));
+        return view('admin.laporan_kegiatan.index', compact('kategoriKegiatan', 'laporanKegiatan'));
     }
 
     public function create() {
-        $laporanKegiatan = LaporanKegiatan::all();
         $kategoriKegiatan = KategoriKegiatan::all();
-        return view('admin.laporan_kegiatan.create',compact('kategoriKegiatan'));
+        return view('admin.laporan_kegiatan.create', compact('kategoriKegiatan'));
     }
 
     public function store(Request $request) {
-
         $validateData = $request->validate([
             'nama' => 'required|string',
-            'kategori_id' => 'required|exists:kategori_kegiatan,id', // Ubah 'kategori' menjadi 'kategori_id'
+            'kategori_id' => 'required|exists:kategori_kegiatan,id',
             'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'keterangan' => 'required|string',
             'semester' => 'required|string',
         ]);
 
-        // dd($validateData); // Cek apakah data sudah tervalidasi
-
-        // Simpan gambar
+        // Simpan gambar ke storage
         $imageName = time() . '.' . $request->file('gambar')->extension();
-        $request->file('gambar')->move(public_path('images'), $imageName);
+        $path = $request->file('gambar')->storeAs('public/images_laporan', $imageName);
 
         // Simpan data ke database
         LaporanKegiatan::create([
             'nama' => $validateData['nama'],
-            'kategori_id' => $validateData['kategori_id'], // Sesuaikan dengan nama field di database
-            'gambar' => $imageName,
+            'kategori_id' => $validateData['kategori_id'],
+            'gambar' => $imageName, // Simpan nama gambar di database
             'keterangan' => $validateData['keterangan'],
             'semester' => $validateData['semester'],
         ]);
 
         return redirect()->route('LaporanKegiatan.index')->with('success', 'Laporan Kegiatan added successfully.');
     }
-
-    // public function store(Request $request) {
-    //     // $laporan = LaporanKegiatan::find($id);
-
-    //     $validateData = $request->validate([
-    //         'nama' => 'required|string',
-    //         'kategori' => 'required|exists:kategori_kegiatans,id',
-    //         'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-    //         'keterangan' => 'required|string',
-    //     ]);
-    //     dd($validateData);
-    //     $imageName = time() . '.' . $request->gambar->extension();
-    //     $request->$validateData->gambar->move(public_path('images'), $imageName);
-
-    //     LaporanKegiatan::create([
-    //         'nama' => $validateData['nama'],
-    //         'kategori_id' => $validateData['kategori_id'], // Sesuaikan dengan nama field di database
-    //         'gambar' => $imageName,
-    //         'keterangan' => $validateData['keterangan'],
-    //         // 'nama' => $request->nama,
-    //         // 'kategori_id' => $request->kategori, // Sesuaikan dengan nama field di database
-    //         // 'gambar' => $imageName,
-    //         // 'keterangan' => $request->keterangan,
-    //     ]);
-
-    //     return redirect()->route('laporan-kegiatan.index')->with('success', 'Laporan Kegiatan added successfully.');
-
-    // }
 
     public function edit($id) {
         $laporanKegiatan = LaporanKegiatan::findOrFail($id);
@@ -97,8 +64,14 @@ class LaporanKegiatanController extends Controller
         $laporanKegiatan = LaporanKegiatan::findOrFail($id);
 
         if ($request->hasFile('gambar')) {
+            // Hapus gambar lama jika ada
+            if (Storage::exists('public/images_laporan/' . $laporanKegiatan->gambar)) {
+                Storage::delete('public/images_laporan/' . $laporanKegiatan->gambar);
+            }
+
+            // Simpan gambar baru
             $imageName = time() . '.' . $request->file('gambar')->extension();
-            $request->file('gambar')->move(public_path('images'), $imageName);
+            $path = $request->file('gambar')->storeAs('public/images_laporan', $imageName);
             $laporanKegiatan->gambar = $imageName;
         }
 
@@ -114,12 +87,18 @@ class LaporanKegiatanController extends Controller
 
     public function destroy($id) {
         $laporanKegiatan = LaporanKegiatan::findOrFail($id);
+
+        // Hapus gambar jika ada
+        if (Storage::exists('public/images_laporan/' . $laporanKegiatan->gambar)) {
+            Storage::delete('public/images_laporan/' . $laporanKegiatan->gambar);
+        }
+
         $laporanKegiatan->delete();
         return redirect()->route('LaporanKegiatan.index')->with('success', 'Laporan Kegiatan deleted successfully.');
     }
 
     public function monitoring_laporan_kegiatan() {
         $laporanKegiatan = LaporanKegiatan::all();
-        return view('admin/monitoring_laporan_kegiatan',compact('laporanKegiatan'));
+        return view('admin.monitoring_laporan_kegiatan', compact('laporanKegiatan'));
     }
 }

@@ -96,7 +96,7 @@
                             <td>{{ $lk->nama }}</td>
                             <td>{{ $lk->kategori->kategori_kegiatan }}</td>
                             <td>
-                                <img src="{{ asset('images/' . $lk->gambar) }}" alt="Gambar" style="width: 100px; cursor: pointer;" onclick="openImageModal('path/to/image.jpg')">
+                                <img src="{{Storage::url('images_laporan/' . $lk->gambar) }}" alt="Gambar" style="width: 100px; cursor: pointer;" onclick="openImageModal('path/to/image.jpg')">
                             </td>
                             <td class="isi-konten">{{ $lk->keterangan }}</td>
                             <td>

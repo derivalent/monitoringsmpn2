@@ -147,9 +147,11 @@
                         <tr>
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $item->judul }}</td>
-                            <td><img src="{{ asset('images_berita/' . $item->gambar) }}" alt="{{ $item->judul }}" width="100"></td>
+                            <td><img src="{{ asset('storage/images_berita/' . $item->gambar) }}" alt="{{ $item->judul }}" width="100"></td>
                             {{-- <td>{{ $item->isi }}</td> --}}
-                            <td><a href="#" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#viewModal" data-gambar="{{ asset('images_berita/' . $item->gambar) }}" data-judul="{{ $item->judul }}" data-isi="{{ $item->isi }}"><i class="fas fa-eye"></i> Lihat</a></td>
+                            <td><a href="#" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#viewModal" data-gambar="{{ asset('storage/images_berita/' . $item->gambar) }}" data-judul="{{ $item->judul }}" data-isi="{{ $item->isi }}">
+                                <i class="fas fa-eye"></i> View
+                            </a></td>
                             <td>
                                 <a href="{{ route('Berita.edit', $item->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Edit</a>
                                 <form action="{{ route('Berita.destroy', $item->id) }}" method="POST" class="d-inline">

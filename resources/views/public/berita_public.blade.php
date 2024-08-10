@@ -438,7 +438,7 @@
 
     // Mengubah data berita menjadi format yang sesuai
     var cards = berita.map(item => ({
-        imageUrl: `{{ url('images_berita') }}/${item.gambar}`,
+        imageUrl: `{{ asset('storage/images_berita') }}/${item.gambar}`,
         title: item.judul,
         date: new Date(item.created_at).toLocaleDateString(), // Mengubah timestamp ke format tanggal
         link: `{{ url('/berita_isi_public') }}/${item.id}`,

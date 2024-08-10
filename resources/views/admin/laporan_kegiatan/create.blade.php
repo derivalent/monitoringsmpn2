@@ -46,7 +46,7 @@
                     <div class="mb-3">
                         <label for="semester" class="form-label">Semester:</label>
                         <select class="form-control" id="status_pekerjaan" name="semester" required>
-                            <option value="">-Pilih Status-</option>
+                            <option value="">-Pilih Semester-</option>
                             <option value="ganjil">Semester Ganjil</option>
                             <option value="genap">Semester Genap</option>
                         </select>

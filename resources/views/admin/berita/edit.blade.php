@@ -27,7 +27,7 @@
                         <label for="gambar" class="form-label">Gambar</label>
                         <input type="file" class="form-control" id="gambar" name="gambar">
                         @if($berita->gambar)
-                            <img src="{{ asset('images_berita/' . $berita->gambar) }}" alt="{{ $berita->judul }}" width="100" class="mt-2">
+                            <img src="{{ asset('storage/images_berita/' . $berita->gambar) }}" alt="{{ $berita->judul }}" width="100" class="mt-2">
                         @endif
                     </div>
 

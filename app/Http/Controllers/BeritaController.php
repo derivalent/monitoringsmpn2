@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Berita;
 
 class BeritaController extends Controller
@@ -30,19 +31,14 @@ class BeritaController extends Controller
             'gambar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'isi' => 'required|string',
         ]);
-        // dd($validatedData);
 
-        // Save Image
+        // Save Image to Storage
         $imageName = time() . '.' . $request->file('gambar')->extension();
-        $request->file('gambar')->move(public_path('images_berita'), $imageName);
-        // $imageName = time() . '.' . $request->file('gambar')->extension();
-        // $request->file('gambar')->move(public_path('images_berita'), $imageName);
-        // dd($validatedData);
-
+        $path = $request->file('gambar')->storeAs('public/images_berita', $imageName);
 
         Berita::create([
             'judul' => $validatedData['judul'],
-            'gambar' => $imageName,
+            'gambar' => $imageName, // Store the image name in the database
             'isi' => $validatedData['isi'],
         ]);
 
@@ -67,13 +63,13 @@ class BeritaController extends Controller
 
         if ($request->hasFile('gambar')) {
             // Delete old image
-            if (file_exists(public_path('images_berita/' . $berita->gambar))) {
-                unlink(public_path('images_berita/' . $berita->gambar));
+            if (Storage::exists('public/images_berita/' . $berita->gambar)) {
+                Storage::delete('public/images_berita/' . $berita->gambar);
             }
 
             // Save new image
             $imageName = time() . '.' . $request->file('gambar')->extension();
-            $request->file('gambar')->move(public_path('images_berita'), $imageName);
+            $path = $request->file('gambar')->storeAs('public/images_berita', $imageName);
             $berita->gambar = $imageName;
         }
 
@@ -85,15 +81,16 @@ class BeritaController extends Controller
     }
 
     public function destroy($id)
-    {
-        $berita = Berita::findOrFail($id);
+{
+    $berita = Berita::findOrFail($id);
 
-        // Delete image
-        if (file_exists(public_path('images_berita/' . $berita->gambar))) {
-            unlink(public_path('images_berita/' . $berita->gambar));
-        }
-
-        $berita->delete();
-        return redirect()->route('Berita.index')->with('success', 'Berita deleted successfully.');
+    // Delete image
+    if (Storage::exists('public/images_berita/' . $berita->gambar)) {
+        Storage::delete('public/images_berita/' . $berita->gambar);
     }
+
+    $berita->delete();
+    return redirect()->route('Berita.index')->with('success', 'Berita deleted successfully.');
+}
+
 }

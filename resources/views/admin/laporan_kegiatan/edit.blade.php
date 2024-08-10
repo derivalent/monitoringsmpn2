@@ -33,7 +33,7 @@
                         <label for="gambar" class="form-label">Gambar</label>
                         <input type="file" name="gambar" class="form-control" id="gambar">
                         @if ($laporanKegiatan->gambar)
-                            <img src="{{ asset('images/' . $laporanKegiatan->gambar) }}" alt="Gambar" style="width: 100px; margin-top: 10px;">
+                            <img src="{{ Storage::url('images_laporan/' . $laporanKegiatan->gambar) }}" alt="Gambar" style="width: 100px; margin-top: 10px;">
                         @endif
                     </div>
 
