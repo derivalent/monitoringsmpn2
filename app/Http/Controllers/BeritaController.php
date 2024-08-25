@@ -41,7 +41,7 @@ class BeritaController extends Controller
             'gambar' => $imageName, // Store the image name in the database
             'isi' => $validatedData['isi'],
         ]);
-
+ 
         return redirect()->route('Berita.index')->with('success', 'Berita created successfully.');
     }
 

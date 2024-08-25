@@ -15,10 +15,14 @@
                 <form method="POST" action="{{ route('LaporanKegiatan.store') }}" enctype="multipart/form-data">
                     @csrf
 
-                    <div class="form-group mb-2">
+                    {{-- <div class="form-group mb-2">
                         <label for="nama">Nama:</label>
                         <input type="text" name="nama" id="nama" class="form-control" required>
-                    </div>
+                    </div> --}}
+                    
+                    <!-- Nama User (Hidden Field) -->
+                    <input type="hidden" name="nama" value="{{ Auth::user()->name }}">
+
 
                     {{-- <div class="form-group mb-3">
                         <label for="kategori">Kategori:</label>

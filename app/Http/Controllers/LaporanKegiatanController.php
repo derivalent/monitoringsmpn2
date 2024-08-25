@@ -69,6 +69,7 @@ class LaporanKegiatanController extends Controller
                 Storage::delete('public/images_laporan/' . $laporanKegiatan->gambar);
             }
 
+            
             // Simpan gambar baru
             $imageName = time() . '.' . $request->file('gambar')->extension();
             $path = $request->file('gambar')->storeAs('public/images_laporan', $imageName);

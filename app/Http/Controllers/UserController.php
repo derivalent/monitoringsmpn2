@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+
+    // public function __Construct() {
+    //     $this->middleware (['role:1']);
+    // }
+
     public function kelola_pengguna() {
         // // $user = User::get();
         // $user = User::join('role','id_role','=','users','role')->get();
@@ -21,6 +26,8 @@ class UserController extends Controller
         ->get();
 
     return view('admin.pengguna.kelola_pengguna', ['user' => $users]);
+
+    return abort(403);
     }
 
     public function create() {

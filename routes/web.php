@@ -10,6 +10,7 @@ use App\Http\Controllers\LaporanKegiatanController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TahunController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PenugasanController;
 // use App\Http\Controllers\TanggunganKinerjaController;
 
 /*
@@ -81,14 +82,16 @@ Route::get('/tanggungan_kinerja', [AdminController::class,'tanggungan_kinerja'])
 // Route::get('/berita_isi_public', [PublicController::class,'berita_isi_public'])->name('BeritaIsiPublic');
 
 
-Route::group(['prefix' => 'admin','middlware' => ['auth']] , function() {
+Route::group(['prefix' => 'admin','middleware' => ['auth']] , function() {
     //kelola pengguna
+    Route::middleware(['role:1'])->group(function () {
     Route::get('/kelola_pengguna', [UserController::class,'kelola_pengguna'])->name('kelola_pengguna');
     Route::get('/kelola_pengguna/create', [UserController::class,'create'])->name('kelola_pengguna.create');
     Route::post('/admin/pengguna/store', [UserController::class, 'store'])->name('user.store');
     Route::get('/kelola_pengguna/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
     Route::put('/kelola_pengguna/{id}', [UserController::class, 'update'])->name('user.update');
     Route::delete('/kelola_pengguna/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+    });
 
     //Laporan Kegiatan
     Route::get('/laporan_kegiatan', [LaporanKegiatanController::class,'index'])->name('LaporanKegiatan.index');
@@ -123,6 +126,35 @@ Route::group(['prefix' => 'admin','middlware' => ['auth']] , function() {
     Route::get('/berita/{id}/edit', [BeritaController::class, 'edit'])->name('Berita.edit');
     Route::put('/berita/{id}', [BeritaController::class, 'update'])->name('Berita.update');
     Route::delete('/berita/{id}', [BeritaController::class, 'destroy'])->name('Berita.destroy');
+
+    // Rute CRUD untuk bidangan Monitoring_Tanggungan_Kinerja
+    // Route::middleware(['role:1,2'])->group(function () {
+    //     // Route::resource('penugasan', PenugasanController::class);
+    //     Route::get('penugasan', [PenugasanController::class, 'index'])->name('Penugasan.index');
+    //     Route::post('penugasan/change-status/{penugasan}', [PenugasanController::class, 'changeStatus'])->name('Penugasan.changeStatus');
+    //     Route::get('penugasan/cretae', [PenugasanController::class, 'create'])->name('Penugasan.create');
+    //     Route::get('penugasan/{penugasan}/edit', [PenugasanController::class, 'edit'])->name('Penugasan.edit');
+    //     Route::post('penugasan/{penugasan}', [PenugasanController::class, 'update'])->name('Penugasan.update');
+    //     Route::post('penugasan/{penugasan}', [PenugasanController::class, 'update'])->name('Penugasan.destroy');
+    // });
+
+    // Route::middleware(['role:3'])->group(function () {
+    //     Route::get('penugasan', [PenugasanController::class, 'index'])->name('Penugasan.index');
+    //     // Route::get('penugasan/{penugasan}/edit', [PenugasanController::class, 'edit'])->name('Penugasan.edit');
+    //     // Route::post('penugasan/{penugasan}', [PenugasanController::class, 'update'])->name('Penugasan.update');
+    // });
+
+    //ini udah kena kok, kalau diatasnya gak kena
+    Route::get('penugasan', [PenugasanController::class, 'index'])->name('Penugasan.index');
+    Route::post('penugasan/change-status/{penugasan}', [PenugasanController::class, 'changeStatus'])->name('Penugasan.changeStatus');
+    Route::get('penugasan/create', [PenugasanController::class, 'create'])->name('Penugasan.create');
+    Route::post('penugasan/store', [PenugasanController::class, 'store'])->name('Penugasan.store');
+    Route::get('penugasan/{penugasan}/edit', [PenugasanController::class, 'edit'])->name('Penugasan.edit');
+    // Route::post('penugasan/{penugasan}', [PenugasanController::class, 'update'])->name('Penugasan.update');
+    Route::put('{penugasan}', [PenugasanController::class, 'update'])->name('Penugasan.update');
+    // Route::post('penugasan/{penugasan/{id}', [PenugasanController::class, 'destroy'])->name('Penugasan.destroy');
+    Route::delete('/penugasan/{id}', [PenugasanController::class, 'destroy'])->name('Penugasan.destroy');
+
 });
 
 

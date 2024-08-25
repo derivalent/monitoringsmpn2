@@ -138,7 +138,56 @@ th, .tampilantabel {
 }
 /**/
 
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust 200px as needed */
+    gap: 10px; /* Adjust spacing between items as needed */
+}
+
+.form-check {
+    display: flex;
+    align-items: center;
+}
+
+
 /*status kategori*/
+
+.status-tugas-baru {
+    display: inline-block;
+    padding: 5px 10px;
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.status-terkirim {
+    display: inline-block;
+    padding: 5px 10px;
+    color: white;
+    background-color: rgb(28, 149, 230);
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.status-diperbaiki {
+    display: inline-block;
+    padding: 5px 10px;
+    color: white;
+    background-color: rgb(189, 255, 7);
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.status-ditolak {
+    display: inline-block;
+    padding: 5px 10px;
+    color: white;
+    background-color: rgb(228, 13, 13);
+    border-radius: 5px;
+    font-weight: bold;
+}
+
 .status-selesai {
     display: inline-block;
     padding: 5px 10px;
@@ -146,6 +195,23 @@ th, .tampilantabel {
     background-color: green;
     border-radius: 5px;
     font-weight: bold;
+}
+
+/* detail item pop up */
+.detail-item {
+    display: flex;
+    justify-content: start;
+    align-items: baseline;
+    margin-bottom: 5px;
+}
+
+.detail-label {
+    min-width: 100px; /* Atur lebar minimum sesuai kebutuhan */
+    font-weight: bold;
+}
+
+.detail-value {
+    flex-grow: 1;
 }
 
 /* th {

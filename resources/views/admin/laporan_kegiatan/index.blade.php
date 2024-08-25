@@ -4,7 +4,7 @@
     <div class="container-fluid px-4">
         <h3 class="mt-4"><b>LAPORAN KEGIATAN HARIAN</b></h3>
         <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item active"><a href="{{ 'dashboard_admin' }}">Dashboard</a></li>
+            <li class="breadcrumb-item active"><a href="{{route('KategoriKegiatan.index') }}">Dashboard</a></li>
             <li class="breadcrumb-item active">Laporan Kegiatan Harian</li>
         </ol>
         <div class="card mb-4">

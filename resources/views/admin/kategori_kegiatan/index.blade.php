@@ -88,9 +88,11 @@
                     <div class="card-header">
                         <i class="fa-solid fa-calendar-days"></i>
                         Tahun
+                        @if(Auth::user()->role == 1 || Auth::user()->role == 2)
                         <a class="btn btn-success float-end" href="{{ route('Tahun.create') }}">
                             <i class="fa fa-plus"></i> &nbsp;Tambah
                         </a>
+                        @endif
                     </div>
                     <div class="card-body">
                         {{-- @if ($message = Session::get('success'))
@@ -99,6 +101,7 @@
                         </div>
                         @endif --}}
                         <div class="outer-wrapper">
+                            @if(Auth::user()->role == 1 || Auth::user()->role == 2)
                             <div class="table-wrapper-mini">
                                 <table id="example" class="table table-striped table-bordered" style="width:100%; overflow-y: auto;">
                                     <thead>
@@ -124,6 +127,35 @@
                                     </tbody>
                                 </table>
                             </div>
+                            @endif
+
+                            @if(Auth::user()->role == 3)
+                            <div class="table-wrapper-mini">
+                                <table id="example" class="table table-striped table-bordered" style="width:100%; overflow-y: auto;">
+                                    <thead>
+                                        <tr class="tampilantabel">
+                                            <th>TAHUN</th>
+                                            {{-- <th>AKSI</th> --}}
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tampilantabel">
+                                        @foreach ($tahun as $thn)
+                                        <tr>
+                                            <td>{{ $thn->data_tahun }}</td>
+                                            {{-- <td>
+                                                <form action="{{ route('Tahun.destroy', $thn->id) }}" method="POST">
+                                                    <a href="{{ route('Tahun.edit', $thn->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                </form>
+                                            </td> --}}
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -147,14 +179,17 @@
                                     <i class="fa-solid fa-print"></i>
                                 </a>
                             </div>
+                            @if(Auth::user()->role == 1 || Auth::user()->role == 2)
                             <a class="btn btn-success btn-sm mb-2" href="{{ route('KategoriKegiatan.create') }}">
                                 <i class="fa fa-plus"></i> &nbsp;Tambah
                             </a>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
             <div class="card-body">
+                @if(Auth::user()->role == 1 || Auth::user()->role == 2)
                 <table class="table table-striped table-bordered" id="datatablesSimple">
                     <thead>
                         <tr>
@@ -190,6 +225,45 @@
                         @endforeach
                     </tbody>
                 </table>
+                @endif
+
+                @if(Auth::user()->role == 3)
+                <table class="table table-striped table-bordered" id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Kategori Kegiatan</th>
+                            <th>Keterangan</th>
+                            {{-- <th>Aksi</th> --}}
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>No</th>
+                            <th>Kategori Kegiatan</th>
+                            <th>Keterangan</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach ($kategoriKegiatan as $kk)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $kk->kategori_kegiatan }}</td>
+                            <td>{{ $kk->keterangan }}</td>
+                            {{-- <td class="btn-group">
+                                <a href="{{ route('KategoriKegiatan.edit', $kk->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                <form action="{{ route('KategoriKegiatan.destroy', $kk->id) }}" method="POST" style="display:inline-block;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin akan menghapus?')">Delete</button>
+                                </form>
+                            </td> --}}
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                @endif
             </div>
         </div>
     </div>
