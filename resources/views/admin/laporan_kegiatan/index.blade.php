@@ -99,13 +99,27 @@
                                 <img src="{{Storage::url('images_laporan/' . $lk->gambar) }}" alt="Gambar" style="width: 100px; cursor: pointer;" onclick="openImageModal('path/to/image.jpg')">
                             </td>
                             <td class="isi-konten">{{ $lk->keterangan }}</td>
-                            <td>
+                            {{-- <td>
                                 <a href="{{ route('LaporanKegiatan.edit', $lk->id) }}" class="btn btn-warning btn-sm">Edit</a>
                                 <form action="{{ route('LaporanKegiatan.destroy', $lk->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
                                 </form>
+                            </td> --}}
+                            <td style="white-space: nowrap;">
+                                <div style="display: flex; justify-content: space-around; align-items: center; gap: 8px;">
+                                    <form action="{{ route('LaporanKegiatan.destroy', $lk->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm" style="background: none; border: none; color: red; padding: 0;" onclick="return confirm('Yakin ingin menghapus?')">
+                                            <i class="fas fa-trash-alt" style="font-size: 15px;"></i>
+                                        </button>
+                                    </form>
+                                    <a class="btn btn-sm" href="{{ route('LaporanKegiatan.edit', $lk->id) }}" style="background: none; border: none; color: orange; padding: 0;">
+                                        <i class="fas fa-edit" style="font-size: 15px;"></i>
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                         @endforeach

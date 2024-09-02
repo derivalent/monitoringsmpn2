@@ -150,13 +150,16 @@ th, .tampilantabel {
 }
 
 
+
+
+
 /*status kategori*/
 
 .status-tugas-baru {
     display: inline-block;
     padding: 5px 10px;
-    color: rgb(0, 0, 0);
-    background-color: rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+    background-color: rgb(97, 94, 94);
     border-radius: 5px;
     font-weight: bold;
 }
@@ -174,7 +177,7 @@ th, .tampilantabel {
     display: inline-block;
     padding: 5px 10px;
     color: white;
-    background-color: rgb(189, 255, 7);
+    background-color: rgb(222, 255, 7);
     border-radius: 5px;
     font-weight: bold;
 }
@@ -213,6 +216,17 @@ th, .tampilantabel {
 .detail-value {
     flex-grow: 1;
 }
+
+table.table td form {
+    display: flex;
+    justify-content: center;
+    gap: 8px; /* Adjust the spacing between buttons */
+}
+
+table.table td form button {
+    flex-shrink: 0; /* Prevent buttons from shrinking */
+}
+
 
 /* th {
     position: sticky;

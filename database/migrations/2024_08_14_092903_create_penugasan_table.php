@@ -17,7 +17,7 @@ return new class extends Migration
             $table->json('tertugas'); // Store selected users as JSON
             $table->string('file')->nullable(); // For PDF file
             $table->text('keterangan')->nullable();
-            $table->enum('status', ['Tugas Baru', 'Terkirim', 'Diperbaiki', 'Ditolak', 'Selesai'])->default('Tugas Baru');
+            $table->enum('status', ['Tugas-Baru', 'Terkirim', 'Diperbaiki', 'Ditolak', 'Selesai'])->default('Tugas Baru');
             $table->text('catatan')->nullable();
             $table->timestamps();
         });

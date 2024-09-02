@@ -71,7 +71,7 @@
                         <div class="mb-3">
                             <label for="status" class="form-label">Status</label>
                             <select class="form-select" id="status" name="status" required>
-                                <option value="Tugas Baru">Tugas Baru</option>
+                                <option value="Tugas-Baru">Tugas Baru</option>
                                 <option value="Terkirim">Terkirim</option>
                                 <option value="Diperbaiki">Diperbaiki</option>
                                 <option value="Ditolak">Ditolak</option>

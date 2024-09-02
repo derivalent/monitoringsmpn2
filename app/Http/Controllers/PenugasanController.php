@@ -26,6 +26,11 @@ class PenugasanController extends Controller
         return view('admin.monitoring_tanggungan_kinerja.create', compact('users'));
     }
 
+    // public function submit()
+    // {
+    //     $users = User::all();
+    //     return view('admin.monitoring_tanggungan_kinerja.submit', compact('users'));
+    // }
     // Store a newly created task in the database
     // public function store(Request $request)
     // {
@@ -178,6 +183,23 @@ class PenugasanController extends Controller
         return redirect()->route('Penugasan.index')->with('success', 'Tugas berhasil diperbarui');
     }
 
+        public function submit($id)
+    {
+        $penugasan = Penugasan::findOrFail($id);
+        // return view('Penugasan.submit', compact('penugasan'));
+        return view('admin.monitoring_tanggungan_kinerja.submit', compact('penugasan'));
+    }
+
+    public function submitUpdate(Request $request, $id)
+    {
+        $penugasan = Penugasan::findOrFail($id);
+        $penugasan->catatan = $request->input('catatan');
+        $penugasan->status = 'Terkirim'; // Mengubah status menjadi 'Terkirim'
+        $penugasan->save();
+
+        return redirect()->route('Penugasan.index')->with('success', 'Tugas berhasil disubmit.');
+    }
+
     // Delete an existing task
     public function destroy($id)
     {
@@ -201,4 +223,5 @@ class PenugasanController extends Controller
 
         return redirect()->route('Penugasan.index')->with('success', 'Status berhasil diubah.');
     }
+
 }
