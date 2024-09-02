@@ -10,11 +10,31 @@ use App\Models\LaporanKegiatan;
 
 class LaporanKegiatanController extends Controller
 {
-    public function index() {
-        $laporanKegiatan = LaporanKegiatan::all();
+    // public function index() {
+    //     $laporanKegiatan = LaporanKegiatan::all();
+    //     $kategoriKegiatan = KategoriKegiatan::all();
+    //     $tahun = Tahun::all();
+    //     return view('admin.laporan_kegiatan.index', compact('kategoriKegiatan', 'laporanKegiatan','tahun'));
+    // }
+    public function index(Request $request) {
+        $query = LaporanKegiatan::query();
+
+        // Filter berdasarkan bulan dan tahun jika ada input
+        if ($request->filled('bulan')) {
+            $query->whereMonth('created_at', $request->bulan);
+        }
+
+        if ($request->filled('tahun')) {
+            $query->whereYear('created_at', $request->tahun);
+        }
+
+        $laporanKegiatan = $query->get();
         $kategoriKegiatan = KategoriKegiatan::all();
-        return view('admin.laporan_kegiatan.index', compact('kategoriKegiatan', 'laporanKegiatan'));
+        $tahun = Tahun::all();
+
+        return view('admin.laporan_kegiatan.index', compact('kategoriKegiatan', 'laporanKegiatan', 'tahun'));
     }
+
 
     public function create() {
         $kategoriKegiatan = KategoriKegiatan::all();
@@ -69,7 +89,7 @@ class LaporanKegiatanController extends Controller
                 Storage::delete('public/images_laporan/' . $laporanKegiatan->gambar);
             }
 
-            
+
             // Simpan gambar baru
             $imageName = time() . '.' . $request->file('gambar')->extension();
             $path = $request->file('gambar')->storeAs('public/images_laporan', $imageName);

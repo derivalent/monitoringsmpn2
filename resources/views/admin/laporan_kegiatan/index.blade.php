@@ -8,65 +8,124 @@
             <li class="breadcrumb-item active">Laporan Kegiatan Harian</li>
         </ol>
         <div class="card mb-4">
-            <div class="card-header">
+            {{-- <div class="card-header">
                 <div class="row align-items-center">
-                    <div class="col-12 d-flex align-items-center justify-content-between flex-wrap" style="padding-bottom: 20px;">
-                        {{-- <div class="d-flex align-items-center">
-                            <i class="fa-regular fa-newspaper" style="color: #000000;"></i> &nbsp;
-                            <b class="ms-2">MONITORING TANGGUNGAN LAPORAN KEGIATAN</b>
-                        </div> --}}
-                        <div class="d-flex align-items-center">
-                            <i class="fa-regular fa-newspaper" style="color: #000000;"></i> &nbsp;
+                    <div class="col-12 d-flex mt-2 align-items-center justify-content-between flex-wrap">
+                        <!-- Judul Laporan -->
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fa-regular fa-newspaper" style="color: #000000;"></i>
                             <b class="ms-2">LAPORAN KEGIATAN HARIAN</b>
-                        </div> <br>
+                        </div>
+
+                        <!-- Dropdown dan Tombol Aksi -->
                         <div class="d-flex align-items-center flex-wrap">
+                            <!-- Dropdown Pilih Bulan -->
                             <div class="me-3 mb-2">
                                 <select id="select-semester" class="form-select form-select-sm">
-                                    <option value="">-Pilih Semester-</option>
-                                    <option value="Semester Ganjil">Semester Ganjil</option>
-                                    <option value="Semester Genap">Semester Genap</option>
+                                    <option value="">-Pilih Bulan-</option>
+                                    <option value="januari">Januari</option>
+                                    <option value="februari">Februari</option>
                                 </select>
                             </div>
-                            {{-- <div class="me-3 mb-2">
-                                <select id="select-semester" class="form-select form-select-sm">
-                                    <option value="">-Pilih Guru-</option>
-                                    <option value="Guru A">Guru A</option>
-                                    <option value="Guru B">Guru B</option>
-                                </select>
-                            </div> --}}
-                            {{-- <div class="me-3 mb-2">
-                                <select id="select-semester" class="form-select form-select-sm">
-                                    <option value="">-Status-</option>
-                                    <option value="Guru A">Selesai</option>
-                                    <option value="Guru B">Perbaikan</option>
-                                    <option value="Guru B">Ditolak</option>
-                                </select>
-                            </div> --}}
+
+                            <!-- Dropdown Pilih Tahun -->
                             <div class="me-3 mb-2">
                                 <select id="select-year" class="form-select form-select-sm">
                                     <option value="">-Pilih Tahun-</option>
-                                    <option value="2023">2023</option>
-                                    <option value="2022">2022</option>
-                                    <option value="2021">2021</option>
-                                    <option value="2020">2020</option>
-                                    <option value="2019">2019</option>
+                                    @foreach ($tahun as $thn)
+                                        <option value="{{ $thn->data_tahun }}">{{ $thn->data_tahun }}</option>
+                                    @endforeach
                                 </select>
                             </div>
-                            <div class="me-3 mb-2">
-                                <a class="btn btn-primary btn-sm" href="#">
+
+                            <!-- Tombol Search dan Print -->
+                            <div class="me-3 mb-2 d-flex">
+                                <a class="btn btn-primary btn-sm me-2" href="#">
                                     <i class="fas fa-search"></i>
                                 </a>
                                 <a class="btn btn-danger btn-sm" href="#">
                                     <i class="fa-solid fa-print"></i>
                                 </a>
                             </div>
-                            <a class="btn btn-success btn-sm mb-2" href="{{ route('LaporanKegiatan.create') }}">
-                                <i class="fa fa-plus"></i> &nbsp;Tambah
-                            </a>
+
+                            <!-- Tombol Tambah -->
+                            <div class="mb-2">
+                                <a class="btn btn-success btn-sm" href="{{ route('LaporanKegiatan.create') }}">
+                                    <i class="fa fa-plus"></i> &nbsp;Tambah
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> --}}
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col-12 d-flex mt-2 align-items-center justify-content-between flex-wrap">
+                        <!-- Judul Laporan -->
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fa-regular fa-newspaper" style="color: #000000;"></i>
+                            <b class="ms-2">LAPORAN KEGIATAN HARIAN</b>
+                        </div>
+
+                        <!-- Formulir Pencarian dan Tombol Aksi -->
+                        <div class="d-flex align-items-center flex-wrap">
+                            <form method="GET" action="{{ route('LaporanKegiatan.index') }}" class="d-flex align-items-center">
+                                <!-- Dropdown Pilih Bulan -->
+                                <div class="me-3 mb-2">
+                                    <select name="bulan" id="select-semester" class="form-select form-select-sm">
+                                        <option value="">-Pilih Bulan-</option>
+                                        <option value="1">Januari</option>
+                                        <option value="2">Februari</option>
+                                        <option value="3">Maret</option>
+                                        <option value="4">April</option>
+                                        <option value="5">Mei</option>
+                                        <option value="6">Juni</option>
+                                        <option value="7">Juli</option>
+                                        <option value="8">Agustus</option>
+                                        <option value="9">September</option>
+                                        <option value="10">Oktober</option>
+                                        <option value="11">November</option>
+                                        <option value="12">Desember</option>
+                                    </select>
+                                </div>
+
+                                <!-- Dropdown Pilih Tahun -->
+                                <div class="me-3 mb-2">
+                                    <select name="tahun" id="select-year" class="form-select form-select-sm">
+                                        <option value="">-Pilih Tahun-</option>
+                                        @foreach ($tahun as $thn)
+                                            <option value="{{ $thn->data_tahun }}">{{ $thn->data_tahun }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <!-- Tombol Search -->
+                                <div class="me-3 mb-2">
+                                    <button type="submit" class="btn btn-primary btn-sm me-2">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </form>
+
+                            <!-- Tombol Print -->
+                            <div class="me-3 mb-2 d-flex">
+                                <a class="btn btn-danger btn-sm" href="#">
+                                    <i class="fa-solid fa-print"></i>
+                                </a>
+                            </div>
+
+                            <!-- Tombol Tambah -->
+                            <div class="mb-2">
+                                <a class="btn btn-success btn-sm" href="{{ route('LaporanKegiatan.create') }}">
+                                    <i class="fa fa-plus"></i> &nbsp;Tambah
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+
             <div class="card-body">
                 <table class="table table-striped table-bordered" id="datatablesSimple">
                     <thead>
