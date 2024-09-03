@@ -145,18 +145,31 @@ Route::group(['prefix' => 'admin','middleware' => ['auth']] , function() {
     // });
 
     //ini udah kena kok, kalau diatasnya gak kena
-    Route::get('penugasan', [PenugasanController::class, 'index'])->name('Penugasan.index');
-    // Route::post('penugasan/change-status/{penugasan}', [PenugasanController::class, 'changeStatus'])->name('Penugasan.changeStatus');
-    Route::post('penugasan/change-status/{penugasan}', [PenugasanController::class, 'updateStatus'])->name('Penugasan.changeStatus');
-    Route::get('penugasan/create', [PenugasanController::class, 'create'])->name('Penugasan.create');
-    Route::post('penugasan/store', [PenugasanController::class, 'store'])->name('Penugasan.store');
-    Route::get('penugasan/{penugasan}/edit', [PenugasanController::class, 'edit'])->name('Penugasan.edit');
-    // Route::post('penugasan/{penugasan}', [PenugasanController::class, 'update'])->name('Penugasan.update');
-    Route::put('{penugasan}', [PenugasanController::class, 'update'])->name('Penugasan.update');
-    // Route::post('penugasan/{penugasan/{id}', [PenugasanController::class, 'destroy'])->name('Penugasan.destroy');
-    Route::delete('/penugasan/{id}', [PenugasanController::class, 'destroy'])->name('Penugasan.destroy');
-    Route::post('/penugasan/{id}/submit', [PenugasanController::class, 'submit'])->name('Penugasan.submit');
-    Route::put('/penugasan/{id}/submitUpdate', [PenugasanController::class, 'submitUpdate'])->name('Penugasan.submitUpdate');
+    // Route::get('penugasan', [PenugasanController::class, 'index'])->name('Penugasan.index');
+    // // Route::post('penugasan/change-status/{penugasan}', [PenugasanController::class, 'changeStatus'])->name('Penugasan.changeStatus');
+    // Route::post('penugasan/change-status/{penugasan}', [PenugasanController::class, 'updateStatus'])->name('Penugasan.changeStatus');
+    // Route::get('penugasan/create', [PenugasanController::class, 'create'])->name('Penugasan.create');
+    // Route::post('penugasan/store', [PenugasanController::class, 'store'])->name('Penugasan.store');
+    // Route::get('penugasan/{penugasan}/edit', [PenugasanController::class, 'edit'])->name('Penugasan.edit');
+    // // Route::post('penugasan/{penugasan}', [PenugasanController::class, 'update'])->name('Penugasan.update');
+    // Route::put('{penugasan}', [PenugasanController::class, 'update'])->name('Penugasan.update');
+    // // Route::post('penugasan/{penugasan/{id}', [PenugasanController::class, 'destroy'])->name('Penugasan.destroy');
+    // Route::delete('/penugasan/{id}', [PenugasanController::class, 'destroy'])->name('Penugasan.destroy');
+    // Route::post('/penugasan/{id}/submit', [PenugasanController::class, 'submit'])->name('Penugasan.submit');
+    // Route::put('/penugasan/{id}/submitUpdate', [PenugasanController::class, 'submitUpdate'])->name('Penugasan.submitUpdate');
+
+    Route::prefix('penugasan')->group(function () {
+        Route::get('/', [PenugasanController::class, 'index'])->name('Penugasan.index');
+        Route::post('/change-status/{penugasan}', [PenugasanController::class, 'updateStatus'])->name('Penugasan.changeStatus');
+        Route::get('/create', [PenugasanController::class, 'create'])->name('Penugasan.create');
+        Route::post('/store', [PenugasanController::class, 'store'])->name('Penugasan.store');
+        Route::get('/{penugasan}/edit', [PenugasanController::class, 'edit'])->name('Penugasan.edit');
+        Route::put('/{penugasan}', [PenugasanController::class, 'update'])->name('Penugasan.update');
+        Route::delete('/{penugasan}', [PenugasanController::class, 'destroy'])->name('Penugasan.destroy');
+        Route::post('/{penugasan}/submit', [PenugasanController::class, 'submit'])->name('Penugasan.submit');
+        Route::put('/{penugasan}/submitUpdate', [PenugasanController::class, 'submitUpdate'])->name('Penugasan.submitUpdate');
+    });
+
 
 });
 

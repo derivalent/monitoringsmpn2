@@ -1,5 +1,30 @@
 <?php
 
+// namespace App\Models;
+
+// use Illuminate\Database\Eloquent\Factories\HasFactory;
+// use Illuminate\Database\Eloquent\Model;
+
+// class Penugasan extends Model
+// {
+//     use HasFactory;
+
+//     protected $table = 'penugasan';
+
+//     protected $fillable = [
+//         'nama_penugas',
+//         'tertugas',
+//         'file',
+//         'keterangan',
+//         'status',
+//         'catatan'
+//     ];
+
+//     protected $casts = [
+//         'tertugas' => 'array',
+//     ];
+// }
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,13 +40,21 @@ class Penugasan extends Model
         'nama_penugas',
         'tertugas',
         'file',
-        'keterangan',
+        'kegiatan',
         'status',
-        'catatan'
+        'catatan',
+        'deadline',
+        'pengumpulan',
     ];
 
     protected $casts = [
-        'tertugas' => 'array',
+        'tertugas' => 'array', // Convert tertugas from JSON to array
+        'deadline' =>'date',
     ];
-}
 
+   // Penugasan.php
+public function kategoriKegiatan()
+{
+    return $this->belongsTo(KategoriKegiatan::class, 'kegiatan', 'id'); // Adjust 'id' if necessary
+}
+}

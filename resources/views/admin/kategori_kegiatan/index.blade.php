@@ -41,7 +41,7 @@
                 </div>
             </div>
         </div>
-
+        @if(Auth::user()->role == 1 || Auth::user()->role == 2)
         <div class="row">
             <div class="col-xl-6">
                 <div class="card mb-4">
@@ -101,7 +101,7 @@
                         </div>
                         @endif --}}
                         <div class="outer-wrapper">
-                            @if(Auth::user()->role == 1 || Auth::user()->role == 2)
+                            {{-- @if(Auth::user()->role == 1 || Auth::user()->role == 2) --}}
                             <div class="table-wrapper-mini">
                                 <table id="example" class="table table-striped table-bordered" style="width:100%; overflow-y: auto;">
                                     <thead>
@@ -127,41 +127,41 @@
                                     </tbody>
                                 </table>
                             </div>
-                            @endif
+                            {{-- @endif --}}
 
-                            @if(Auth::user()->role == 3)
+                            {{-- @if(Auth::user()->role == 3)
                             <div class="table-wrapper-mini">
                                 <table id="example" class="table table-striped table-bordered" style="width:100%; overflow-y: auto;">
                                     <thead>
                                         <tr class="tampilantabel">
                                             <th>TAHUN</th>
-                                            {{-- <th>AKSI</th> --}}
+                                            <th>AKSI</th>
                                         </tr>
                                     </thead>
                                     <tbody class="tampilantabel">
                                         @foreach ($tahun as $thn)
                                         <tr>
                                             <td>{{ $thn->data_tahun }}</td>
-                                            {{-- <td>
+                                            <td>
                                                 <form action="{{ route('Tahun.destroy', $thn->id) }}" method="POST">
                                                     <a href="{{ route('Tahun.edit', $thn->id) }}" class="btn btn-primary btn-sm">Edit</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                                 </form>
-                                            </td> --}}
+                                            </td>
                                         </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
-                            @endif
+                            @endif --}}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
+        @endif
         <div class="card mb-4">
             <div class="card-header">
                 <div class="row align-items-center">

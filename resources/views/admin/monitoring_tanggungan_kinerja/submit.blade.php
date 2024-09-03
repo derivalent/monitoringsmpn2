@@ -6,8 +6,7 @@
             <h3 class="mt-4"><b>Submit Tugas</b></h3>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item active"><a href="{{ route('KategoriKegiatan.index') }}">Dashboard</a></li>
-                <li class="breadcrumb-item active"><a href="{{ route('Penugasan.index') }}">Monitoring Tanggungan Kinerja</a>
-                </li>
+                <li class="breadcrumb-item active"><a href="{{ route('Penugasan.index') }}">Monitoring Tanggungan Kinerja</a></li>
                 <li class="breadcrumb-item active">Submit Tugas</li>
             </ol>
             <div class="card mb-4">
@@ -18,10 +17,27 @@
                     <form action="{{ route('Penugasan.submitUpdate', $penugasan->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
+
+                        {{-- <div class="mb-3">
+                            <label for="kegiatan" class="form-label">Kegiatan</label>
+                            <select name="kategori_kegiatan">
+                                @foreach ($kategoriKegiatan as $kategori)
+                                    <option value="{{ $kategori->id }}">{{ $kategori->kategori_kegiatan }}</option>
+                                @endforeach
+                            </select>
+                        </div> --}}
                         <div class="mb-3">
-                            <label for="keterangan" class="form-label">Keterangan Tugas</label>
-                            <textarea class="form-control" id="keterangan" name="keterangan" rows="3" readonly>{{ $penugasan->keterangan }}</textarea>
+                            <label for="kategori_kegiatan" class="form-label">Kegiatan</label>
+                            <select name="kategori_kegiatan" id="kategori_kegiatan" class="form-control" disabled>
+                                @foreach ($kategoriKegiatan as $kategori)
+                                    <option value="{{ $kategori->id }}" {{ $kategori->id == $penugasan->kategori_kegiatan_id ? 'selected' : '' }}>
+                                        {{ $kategori->kategori_kegiatan }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
+
+
                         <div class="mb-3">
                             <label for="tertugas" class="form-label">Tertugas</label>
                             <input type="text" class="form-control" id="tertugas" name="tertugas" value="{{ auth()->user()->name }}" readonly>
@@ -40,17 +56,13 @@
                             <input type="file" class="form-control" id="file" name="file" readonly>
                         </div>
 
-                        {{-- <div class="mb-3">
-                            <label for="keterangan" class="form-label">Keterangan</label>
-                            <textarea class="form-control" id="keterangan" name="keterangan" rows="3" readonly>{{ $penugasan->keterangan }}</textarea>
-                        </div> --}}
-
                         <div class="mb-3">
                             <label for="catatan" class="form-label">Catatan</label>
-                            <textarea class="form-control" id="catatan" name="catatan" rows="3"></textarea>
+                            <textarea class="form-control" id="catatan" name="catatan" rows="3">{{ old('catatan') }}</textarea>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Submit Tugas</button>
+                        <a href="{{ route('Penugasan.index') }}" class="btn btn-secondary">Cancel</a>
                     </form>
                 </div>
             </div>
