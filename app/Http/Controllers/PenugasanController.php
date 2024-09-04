@@ -10,6 +10,7 @@ use App\Models\KategoriKegiatan;
 use Illuminate\Support\Facades\Auth;
 // use App\Http\Controllers\Storage;
 use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PenugasanController extends Controller
 {
@@ -266,4 +267,68 @@ class PenugasanController extends Controller
 
         return redirect()->route('Penugasan.index')->with('success', 'Status berhasil diubah.');
     }
+
+    // public function print(Request $request)
+    // {
+    //     // Ambil data penugasan berdasarkan filter (jika ada)
+    //     $query = Penugasan::with('kategoriKegiatan');
+    //     $query = Penugasan::query();
+
+    //     if ($request->filled('bulan')) {
+    //         $query->whereMonth('created_at', $request->bulan);
+    //     }
+
+    //     if ($request->filled('tahun')) {
+    //         $query->whereYear('created_at', $request->tahun);
+    //     }
+
+    //     $penugasan = $query->get();
+
+    //     // Load view dan generate PDF
+    //     $pdf = PDF::loadView('admin.monitoring_tanggungan_kinerja.print', compact('penugasan'));
+    //     foreach ($penugasan as $item) {
+    //         $item->kegiatan; // Now you can access 'kegiatan'
+    //     }
+
+    //     $penugasan = $query->get();
+    //     $users = User::all();
+    //     $currentUser = Auth::user();
+    //     $tahun = Tahun::all();
+    //     $kategoriKegiatan = KategoriKegiatan::all();
+
+    //     // Download PDF
+    //     return $pdf->download('laporan_penugasan.pdf', compact('penugasan', 'users', 'currentUser', 'tahun', 'kategoriKegiatan'));
+    // }
+
+//     public function print(Request $request)
+// {
+//     // Ambil data penugasan berdasarkan filter (jika ada)
+//     $query = Penugasan::with('kategoriKegiatan');
+//     if ($request->filled('bulan')) {
+//         $query->whereMonth('created_at', $request->bulan);
+//     }
+//     if ($request->filled('tahun')) {
+//         $query->whereYear('created_at', $request->tahun);
+//     }
+//     $penugasan = $query->get();
+
+//     // Generate PDF untuk setiap penugasan
+//     foreach ($penugasan as $item) {
+//         $pdf = PDF::loadView('admin.monitoring_tanggungan_kinerja.print', compact('item'));
+//         return $pdf->download('laporan_penugasan_' . $item->id . '.pdf');
+//     }
+// }
+
+public function printAll(Request $request)
+{
+    // Ambil data penugasan berdasarkan filter
+    $query = Penugasan::with('kategoriKegiatan');
+    // ... (kondisi filter)
+
+    $penugasan = $query->get();
+
+    // Generate PDF untuk semua data
+    $pdf = PDF::loadView('admin.monitoring_tanggungan_kinerja.print_all', compact('penugasan'));
+    return $pdf->download('laporan_penugasan_semua.pdf');
+}
 }
