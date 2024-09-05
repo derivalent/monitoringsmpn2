@@ -114,13 +114,31 @@
                                         @foreach ($tahun as $thn)
                                         <tr>
                                             <td>{{ $thn->data_tahun }}</td>
-                                            <td>
-                                                <form action="{{ route('Tahun.destroy', $thn->id) }}" method="POST">
+
+                                                {{-- <form action="{{ route('Tahun.destroy', $thn->id) }}" method="POST">
                                                     <a href="{{ route('Tahun.edit', $thn->id) }}" class="btn btn-primary btn-sm">Edit</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                                </form>
+                                                </form> --}}
+
+                                            <td style="white-space: nowrap;">
+                                                <div
+                                                    style="display: flex; justify-content: space-around; align-items: center; gap: 4px;">
+                                                    <form action="{{ route('Tahun.destroy', $thn->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-sm"
+                                                            style="background: none; border: none; color: red; padding: 0;"
+                                                            onclick="return confirm('Yakin ingin menghapus?')">
+                                                            <i class="fas fa-trash-alt" style="font-size: 15px;"></i>
+                                                        </button>
+                                                    </form>
+                                                    <a class="btn btn-sm" href="{{ route('Tahun.edit', $thn->id) }}"
+                                                        style="background: none; border: none; color: orange; padding: 0;">
+                                                        <i class="fas fa-edit" style="font-size: 15px;"></i>
+                                                    </a>
+                                                </div>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -213,13 +231,31 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $kk->kategori_kegiatan }}</td>
                             <td>{{ $kk->keterangan }}</td>
-                            <td class="btn-group">
+                            {{-- <td class="btn-group">
                                 <a href="{{ route('KategoriKegiatan.edit', $kk->id) }}" class="btn btn-warning btn-sm">Edit</a>
                                 <form action="{{ route('KategoriKegiatan.destroy', $kk->id) }}" method="POST" style="display:inline-block;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin akan menghapus?')">Delete</button>
                                 </form>
+                            </td> --}}
+                            <td style="white-space: nowrap;">
+                                <div
+                                    style="display: flex; justify-content: space-around; align-items: center; gap: 4px;">
+                                    <form action="{{ route('KategoriKegiatan.destroy', $kk->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm"
+                                            style="background: none; border: none; color: red; padding: 0;"
+                                            onclick="return confirm('Yakin ingin menghapus?')">
+                                            <i class="fas fa-trash-alt" style="font-size: 15px;"></i>
+                                        </button>
+                                    </form>
+                                    <a class="btn btn-sm" href="{{ route('KategoriKegiatan.edit', $kk->id) }}"
+                                        style="background: none; border: none; color: orange; padding: 0;">
+                                        <i class="fas fa-edit" style="font-size: 15px;"></i>
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                         @endforeach

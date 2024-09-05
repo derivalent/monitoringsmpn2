@@ -27,7 +27,7 @@
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-admin">
     <div class="container-fluid">
         <a class="navbar-brand" href="/dashboardadmin"> &nbsp; &nbsp;
-            <img src="images/logosmpn2sempu.png" alt="logo smp" width="50px"> &nbsp;
+            <img src="https://i.postimg.cc/TP2ymH4G/logosmpn2sempu.png" alt="logo smp" width="50px"> &nbsp;
             <b>SMPN 2 SEMPU</b>
         </a>
         <!-- Sidebar Toggle -->

@@ -58,6 +58,7 @@
                                         <a class="btn btn-danger btn-sm" href="{{ route('penugasan.print.all') }}">
                                             <i class="fa-solid fa-print"></i> Cetak Semua
                                         </a>
+                                        {{-- <a href="{{ route('cetak-laporan') }}" class="btn btn-danger btn-sm">Cetak Laporan</a> --}}
                                     </div>
 
                                     <!-- Tombol Tambah -->
@@ -74,7 +75,7 @@
                     <div class="card-body">
                         <table class="table table-striped table-bordered" id="datatablesSimple">
                             <thead>
-                                <tr class="tampilantabel">
+                                <tr>
                                     <th>No</th>
                                     <th>Tertugas</th>
                                     <th>File</th>
@@ -101,6 +102,13 @@
                                                     style="font-size: 24px; color: rgba(255, 187, 0, 0.862);"></i>
                                             </a>
                                         </td>
+                                        {{-- <td class="tampilantabel">
+                                            <a href="{{ asset('storage/' . $item->file) }}" target="_blank">
+                                                <i class="fas fa-file-pdf"
+                                                    style="font-size: 24px; color: rgba(255, 187, 0, 0.862);"></i>
+                                            </a>
+                                        </td> --}}
+                                        {{-- <td><img src="{{ asset('storage/images_berita/' . $item->gambar) }}" alt="{{ $item->judul }}" width="100"></td> --}}
                                         {{-- <td>{{ $item->kegiatan }}</td> --}}
                                         <td>{{ $item->kategoriKegiatan->kategori_kegiatan ?? 'N/A' }}</td>
                                         <td>

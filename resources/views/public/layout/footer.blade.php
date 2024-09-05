@@ -4,17 +4,17 @@
             <div class="col-md-2 mb-3">
                 <h5><span style="color: #ffc107;"><b>Menu</b></span></h5>
                 <ul class="list-unstyled">
-                    <li><a href="#">Home</a></li>
+                    <li><a href="{{ route('Beranda') }}">Home</a></li>
                     <li><a href="#">Contact</a></li>
-                    <li><a href="#">Berita</a></li>
+                    <li><a href="{{ route('BeritaPublic') }}">Berita</a></li>
                     <li><a href="{{ route('Login') }}">Login</a></li>
                 </ul>
             </div>
             <div class="col-md-6 mb-3 contact-info">
-                <p><i class="fas fa-map-marker-alt"></i><span class="ms-2">Jl. Tiga Berlian Kel. Kepatihan Kec.
-                        Banyuwangi Kab. Banyuwangi</span></p>
+                <p><i class="fas fa-map-marker-alt"></i><span class="ms-2">Jalan Sragi Gendoh, Desa Gendoh,
+                    Kecamatan Sempu, Kabupaten Banyuwangi.</span></p>
                 <p><i class="fas fa-phone"></i><span class="ms-2">0333 422113</span></p>
-                <p><i class="fas fa-envelope"></i><span class="ms-2">damkarbanyuwangi113@gmail.com</span></p>
+                <p><i class="fas fa-envelope"></i><span class="ms-2">smpn2sempu01@gmail.com</span></p>
             </div>
             {{-- <div class="col-md-4">
                 <h5>TENTANG DAMKAR BANYUWANGI</h5>

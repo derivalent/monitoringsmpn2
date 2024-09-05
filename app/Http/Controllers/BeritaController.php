@@ -5,19 +5,46 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Berita;
+use App\Models\Tahun;
 
 class BeritaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $berita = Berita::all();
-        // $berita = Berita::orderBy("judul", "gambar", "isi")->paginate(5);
-        // $berita = Berita::orderBy('judul', 'asc')
-        //             ->orderBy('gambar', 'asc')
-        //             ->orderBy('isi', 'asc')
-        //             ->paginate(5);
-        return view('admin.berita.berita_admin', compact('berita'));
+        $query = Berita::query();
+
+        if ($request->filled('bulan')) {
+            $query->whereMonth('created_at', $request->bulan);
+        }
+
+        if ($request->filled('tahun')) {
+            $query->whereYear('created_at', $request->tahun);
+        }
+
+        // $berita = Berita::all();
+        $berita = $query->get();
+        $tahun = Tahun::all();
+
+        return view('admin.berita.berita_admin', compact('berita', 'tahun'));
     }
+    // public function index()
+    // {
+    //     // $query = Berita::query();
+
+    //     // if ($request->filled('bulan')) {
+    //     //     $query->whereMonth('created_at', $request->bulan);
+    //     // }
+
+    //     // if ($request->filled('tahun')) {
+    //     //     $query->whereYear('created_at', $request->tahun);
+    //     // }
+
+    //     $berita = Berita::all();
+    //     // $berita = $query->get();
+    //     $tahun = Tahun::all();
+
+    //     return view('admin.berita.berita_admin', compact('berita', 'tahun'));
+    // }
 
     public function create()
     {
@@ -41,7 +68,7 @@ class BeritaController extends Controller
             'gambar' => $imageName, // Store the image name in the database
             'isi' => $validatedData['isi'],
         ]);
- 
+
         return redirect()->route('Berita.index')->with('success', 'Berita created successfully.');
     }
 

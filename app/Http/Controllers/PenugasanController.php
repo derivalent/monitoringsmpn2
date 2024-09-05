@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Auth;
 // use App\Http\Controllers\Storage;
 use Illuminate\Support\Facades\Storage;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
+
+
 
 class PenugasanController extends Controller
 {
@@ -108,45 +111,45 @@ class PenugasanController extends Controller
     // }
 
     public function update(Request $request, $id)
-{
-    // Temukan penugasan berdasarkan ID
-    $penugasan = Penugasan::findOrFail($id);
+    {
+        // Temukan penugasan berdasarkan ID
+        $penugasan = Penugasan::findOrFail($id);
 
-    // Validasi data yang diterima dari form
-    $request->validate([
-        'kategori_kegiatan' => 'required|integer|exists:kategori_kegiatan,id',
-        'tertugas' => 'required|array',
-        'file' => 'nullable|mimes:pdf|max:2048',
-        'catatan' => 'nullable|string',
-        'status' => 'required|string',
-        'deadline' => 'required|date',
-    ]);
+        // Validasi data yang diterima dari form
+        $request->validate([
+            'kategori_kegiatan' => 'required|integer|exists:kategori_kegiatan,id',
+            'tertugas' => 'required|array',
+            'file' => 'nullable|mimes:pdf|max:2048',
+            'catatan' => 'nullable|string',
+            'status' => 'required|string',
+            'deadline' => 'required|date',
+        ]);
 
-    // Perbarui record penugasan
-    $penugasan->update([
-        'kegiatan' => $request->input('kategori_kegiatan'),
-        'tertugas' => implode(',', $request->input('tertugas')), // Simpan sebagai string terpisah
-        'catatan' => $request->input('catatan'),
-        'status' => $request->input('status'),
-        'deadline' => $request->input('deadline'),
-        'pengumpulan' => $request->input('status') == 'Terkirim' ? now() : $penugasan->pengumpulan,
-    ]);
+        // Perbarui record penugasan
+        $penugasan->update([
+            'kegiatan' => $request->input('kategori_kegiatan'),
+            'tertugas' => implode(',', $request->input('tertugas')), // Simpan sebagai string terpisah
+            'catatan' => $request->input('catatan'),
+            'status' => $request->input('status'),
+            'deadline' => $request->input('deadline'),
+            'pengumpulan' => $request->input('status') == 'Terkirim' ? now() : $penugasan->pengumpulan,
+        ]);
 
-    // Tangani upload file jika ada
-    if ($request->hasFile('file')) {
-        // Hapus file lama jika ada
-        if ($penugasan->file) {
-            Storage::delete($penugasan->file);
+        // Tangani upload file jika ada
+        if ($request->hasFile('file')) {
+            // Hapus file lama jika ada
+            if ($penugasan->file) {
+                Storage::delete($penugasan->file);
+            }
+
+            $file = $request->file('file')->store('files', 'public');
+            $penugasan->file = $file;
         }
 
-        $file = $request->file('file')->store('files', 'public');
-        $penugasan->file = $file;
+        $penugasan->save();
+
+        return redirect()->route('Penugasan.index')->with('success', 'Tugas berhasil diperbarui.');
     }
-
-    $penugasan->save();
-
-    return redirect()->route('Penugasan.index')->with('success', 'Tugas berhasil diperbarui.');
-}
 
 
 
@@ -190,7 +193,7 @@ class PenugasanController extends Controller
     //     return redirect()->route('Penugasan.index')->with('success', 'Tugas berhasil diperbarui.');
     // }
 
-//hampir kena
+    //hampir kena
     // public function update(Request $request, $id)
     // {
     //     // dd($request->all());
@@ -300,35 +303,99 @@ class PenugasanController extends Controller
     //     return $pdf->download('laporan_penugasan.pdf', compact('penugasan', 'users', 'currentUser', 'tahun', 'kategoriKegiatan'));
     // }
 
-//     public function print(Request $request)
-// {
-//     // Ambil data penugasan berdasarkan filter (jika ada)
-//     $query = Penugasan::with('kategoriKegiatan');
-//     if ($request->filled('bulan')) {
-//         $query->whereMonth('created_at', $request->bulan);
-//     }
-//     if ($request->filled('tahun')) {
-//         $query->whereYear('created_at', $request->tahun);
-//     }
-//     $penugasan = $query->get();
+    //     public function print(Request $request)
+    // {
+    //     // Ambil data penugasan berdasarkan filter (jika ada)
+    //     $query = Penugasan::with('kategoriKegiatan');
+    //     if ($request->filled('bulan')) {
+    //         $query->whereMonth('created_at', $request->bulan);
+    //     }
+    //     if ($request->filled('tahun')) {
+    //         $query->whereYear('created_at', $request->tahun);
+    //     }
+    //     $penugasan = $query->get();
 
-//     // Generate PDF untuk setiap penugasan
-//     foreach ($penugasan as $item) {
-//         $pdf = PDF::loadView('admin.monitoring_tanggungan_kinerja.print', compact('item'));
-//         return $pdf->download('laporan_penugasan_' . $item->id . '.pdf');
-//     }
+    //     // Generate PDF untuk setiap penugasan
+    //     foreach ($penugasan as $item) {
+    //         $pdf = PDF::loadView('admin.monitoring_tanggungan_kinerja.print', compact('item'));
+    //         return $pdf->download('laporan_penugasan_' . $item->id . '.pdf');
+    //     }
+    // }
+
+    //function printallnya udah kenak kok
+    // public function printAll(Request $request)
+    // {
+    //     Carbon::setLocale('id');
+    //     // Ambil data penugasan berdasarkan filter
+    //     $query = Penugasan::with('kategoriKegiatan');
+    //     // ... (kondisi filter)
+
+    //     $penugasan = $query->get();
+
+    //     // Generate PDF untuk semua data
+    //     $pdf = PDF::loadView('admin.monitoring_tanggungan_kinerja.print_all', compact('penugasan'));
+    //     return $pdf->download('laporan_penugasan_semua.pdf');
+    // }
+
+//     public function printForm()
+// {
+//     return view('admin.monitoring_tanggungan_kinerja.cetak_laporan');
 // }
 
+// public function printData(Request $request)
+// {
+//     $request->validate([
+//         'tanggal_awal' => 'required|date',
+//         'tanggal_akhir' => 'required|date|after:tanggal_awal',
+//     ]);
+
+//     $penugasan = Penugasan::whereBetween('deadline', [$request->tanggal_awal, $request->tanggal_akhir])
+//                             ->get();
+
+//     $pdf = PDF::loadView('admin.monitoring_tanggungan_kinerja.print_all', compact('penugasan'));
+//     return $pdf->download('laporan_penugasan_' . date('YmdHis') . '.pdf');
+// }
+
+public function printForm()
+{
+    return view('admin.monitoring_tanggungan_kinerja.cetak_laporan');
+}
+
+// public function printData(Request $request)
+// {
+//     $request->validate([
+//         'tanggal_awal' => 'required|date',
+//         'tanggal_akhir' => 'required|date|after:tanggal_awal',
+//     ]);
+
+//     $penugasan = Penugasan::whereBetween('deadline', [$request->tanggal_awal, $request->tanggal_akhir])
+//                             ->get();
+
+//     // dd($penugasan);
+//     $pdf = PDF::loadView('admin.monitoring_tanggungan_kinerja.print_all', compact('penugasan'));
+//     return $pdf->download('laporan_penugasan_' . date('YmdHis') . '.pdf');
+// }
+
+
+//ini bisa
 public function printAll(Request $request)
 {
+    Carbon::setLocale('id');
+
     // Ambil data penugasan berdasarkan filter
     $query = Penugasan::with('kategoriKegiatan');
-    // ... (kondisi filter)
+
+    if ($request->has('start_date') && $request->has('end_date')) {
+        $startDate = Carbon::parse($request->start_date);
+        $endDate = Carbon::parse($request->end_date);
+        $query->whereBetween('deadline', [$startDate, $endDate]);
+    }
 
     $penugasan = $query->get();
-
+    // dd($penugasan);
     // Generate PDF untuk semua data
     $pdf = PDF::loadView('admin.monitoring_tanggungan_kinerja.print_all', compact('penugasan'));
-    return $pdf->download('laporan_penugasan_semua.pdf');
+    return $pdf->download('Laporan_Tannggungan_Kinerja.pdf');
 }
+
 }

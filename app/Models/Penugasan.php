@@ -57,4 +57,9 @@ public function kategoriKegiatan()
 {
     return $this->belongsTo(KategoriKegiatan::class, 'kegiatan', 'id'); // Adjust 'id' if necessary
 }
+
+// public function user()
+//     {
+//         return $this->belongsTo(User::class);
+//     }
 }

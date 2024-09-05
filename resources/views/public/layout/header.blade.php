@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-public box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
     <div class="container">
         <a class="navbar-brand" href="#">
-            <img src="https://i.postimg.cc/TP2ymH4G/logosmpn2sempu.png" alt="Dinas Pemadam Kebakaran" class="logo-img">
+            <img src="https://i.postimg.cc/TP2ymH4G/logosmpn2sempu.png" alt="logo sekolah" class="logo-img">
         </a>
         <div class="brand-text mt-3">
             <p>
