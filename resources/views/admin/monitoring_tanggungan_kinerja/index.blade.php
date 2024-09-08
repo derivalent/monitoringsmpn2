@@ -291,11 +291,11 @@
                                     </div>
 
                                     <!-- Tombol Tambah -->
-                                    <div class="mb-2">
+                                    {{-- <div class="mb-2">
                                         <a class="btn btn-success btn-sm" href="{{ route('Penugasan.create') }}">
                                             <i class="fa fa-plus"></i> &nbsp;Tambah
                                         </a>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -310,7 +310,7 @@
                                     <th>File</th>
                                     <th>Kegiatan</th>
                                     <th>Status</th>
-                                    <th>Progress</th> <!-- New Progress Column -->
+                                    {{-- <th>Progress</th> <!-- New Progress Column --> --}}
                                     <th>Detail</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -337,7 +337,7 @@
                                             <div class="status-{{ strtolower($item->status) }}">{{ $item->status }}</div>
                                         </td>
 
-                                        <td>
+                                        {{-- <td>
                                             <form action="{{ route('Penugasan.changeStatus', $item->id) }}"
                                                 method="POST" style="display: flex; justify-content: center; gap: 8px;">
                                                 @csrf
@@ -354,7 +354,7 @@
                                                     <i class="fas fa-check"></i>
                                                 </button>
                                             </form>
-                                        </td>
+                                        </td> --}}
 
                                         <td>
                                             <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal"
@@ -365,7 +365,7 @@
                                         <td style="white-space: nowrap;">
                                             <div
                                                 style="display: flex; justify-content: space-around; align-items: center; gap: 8px;">
-                                                <form action="{{ route('Penugasan.destroy', $item->id) }}"
+                                                {{-- <form action="{{ route('Penugasan.destroy', $item->id) }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('DELETE')
@@ -378,7 +378,7 @@
                                                 <a class="btn btn-sm" href="{{ route('Penugasan.edit', $item->id) }}"
                                                     style="background: none; border: none; color: orange; padding: 0;">
                                                     <i class="fas fa-edit" style="font-size: 15px;"></i>
-                                                </a>
+                                                </a> --}}
                                                 <form action="{{ route('Penugasan.submit', $item->id) }}" method="POST">
                                                     @csrf
                                                     <button type="submit" class="btn btn-sm"

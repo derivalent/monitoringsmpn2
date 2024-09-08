@@ -121,6 +121,7 @@
                             <textarea class="form-control" id="isi" name="isi" rows="5" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
+                        <a href="{{ route('Berita.index') }}" class="btn btn-secondary">Cancel</a>
                     </form>
                 </div>
             </div>

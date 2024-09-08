@@ -18,14 +18,6 @@
                         @csrf
                         @method('PUT')
 
-                        {{-- <div class="mb-3">
-                            <label for="kegiatan" class="form-label">Kegiatan</label>
-                            <select name="kategori_kegiatan">
-                                @foreach ($kategoriKegiatan as $kategori)
-                                    <option value="{{ $kategori->id }}">{{ $kategori->kategori_kegiatan }}</option>
-                                @endforeach
-                            </select>
-                        </div> --}}
                         <div class="mb-3">
                             <label for="kategori_kegiatan" class="form-label">Kegiatan</label>
                             <select name="kategori_kegiatan" id="kategori_kegiatan" class="form-control" disabled>
@@ -37,7 +29,6 @@
                             </select>
                         </div>
 
-
                         <div class="mb-3">
                             <label for="tertugas" class="form-label">Tertugas</label>
                             <input type="text" class="form-control" id="tertugas" name="tertugas" value="{{ auth()->user()->name }}" readonly>
@@ -47,18 +38,21 @@
                             <label for="file" class="form-label">File PDF</label>
                             @if($penugasan->file)
                                 <div class="mb-2">
-                                    <a href="{{ asset('storage/files/' . $penugasan->file) }}" target="_blank">
+                                    <a href="{{ asset('storage/' . $penugasan->file) }}" target="_blank">
                                         <i class="fas fa-file-pdf" style="font-size: 24px; color: rgba(255, 187, 0, 0.862);"></i>
-                                        {{ $penugasan->file }}
+                                        {{ basename($penugasan->file) }}
                                     </a>
                                 </div>
+                                <p>Anda sudah mengupload file. Jika ingin mengubahnya, silakan unggah file baru di bawah ini.</p>
+                            @else
+                                <p>Anda belum mengupload file. Silakan unggah file di bawah ini.</p>
                             @endif
-                            <input type="file" class="form-control" id="file" name="file" readonly>
+                            <input type="file" class="form-control" id="file" name="file">
                         </div>
 
                         <div class="mb-3">
                             <label for="catatan" class="form-label">Catatan</label>
-                            <textarea class="form-control" id="catatan" name="catatan" rows="3">{{ old('catatan') }}</textarea>
+                            <textarea class="form-control" id="catatan" name="catatan" rows="3">{{ old('catatan', $penugasan->catatan) }}</textarea>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Submit Tugas</button>

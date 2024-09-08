@@ -187,7 +187,7 @@
 <body>
     <div class="box-login">
         <div class="judul mt-4 mb-3">
-            <h1>SMPN 2 SEMPU</h1>
+            <h1><b>SMPN 2 SEMPU</b></h1>
         </div>
         <hr>
         <form id="loginForm" action="{{ route('LoginProses') }}" method="POST" novalidate>

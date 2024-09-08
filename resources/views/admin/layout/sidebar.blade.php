@@ -34,7 +34,7 @@
                     Monitoring
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
-                @endif
+                {{-- @endif --}}
                 <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link" href="{{ route('Penugasan.index') }}">Monitoring - Tanggungan Kinerja</a>
@@ -43,6 +43,7 @@
                         <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a> --}}
                     </nav>
                 </div>
+                @endif
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                     <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                     Penugasan
@@ -50,7 +51,7 @@
                 </a>
                 <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="{{ route('Penugasan.index') }}">Tanggungan Kinerja</a>
+                        <a class="nav-link" href="{{ route('Penugasan.index_data') }}">Tanggungan Kinerja</a>
                         <a class="nav-link" href="{{ 'laporan_kegiatan' }}">Laporan Kegiatan</a>
                     </nav>
                 </div>

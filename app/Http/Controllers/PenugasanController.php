@@ -17,7 +17,7 @@ use Carbon\Carbon;
 
 class PenugasanController extends Controller
 {
-    // Display the list of tasks with optional filtering by month and year
+    // Display dengan filter bulan dan tahun
     public function index(Request $request)
     {
         $query = Penugasan::with('kategoriKegiatan');
@@ -39,6 +39,41 @@ class PenugasanController extends Controller
 
         return view('admin.monitoring_tanggungan_kinerja.index', compact('penugasan', 'users', 'currentUser', 'tahun', 'kategoriKegiatan'));
     }
+
+    public function index_data(Request $request)
+    {
+        // Mendapatkan nama user yang sedang login
+        $userName = Auth::user()->name;
+
+        // Membuat query untuk mengambil data penugasan
+        $query = Penugasan::with('kategoriKegiatan');
+
+        // Menyaring data berdasarkan bulan jika ada
+        if ($request->filled('bulan')) {
+            $query->whereMonth('created_at', $request->bulan);
+        }
+
+        // Menyaring data berdasarkan tahun jika ada
+        if ($request->filled('tahun')) {
+            $query->whereYear('created_at', $request->tahun);
+        }
+
+        // Menyaring data penugasan yang tertugas sesuai dengan nama user yang login
+        $query->whereJsonContains('tertugas', $userName);
+
+        // Mengambil data penugasan yang telah difilter
+        $penugasan = $query->get();
+
+        // Mengambil data tambahan untuk view
+        $users = User::all();
+        $currentUser = Auth::user();
+        $tahun = Tahun::all();
+        $kategoriKegiatan = KategoriKegiatan::all();
+
+        // Mengembalikan view dengan data penugasan yang sesuai
+        return view('admin.monitoring_tanggungan_kinerja.index_data', compact('penugasan', 'users', 'currentUser', 'tahun', 'kategoriKegiatan'));
+    }
+
 
     // Show the form for creating a new task
     public function create()
@@ -94,22 +129,6 @@ class PenugasanController extends Controller
         return view('admin.monitoring_tanggungan_kinerja.edit', compact('penugasan', 'users', 'kategoriKegiatan'));
     }
 
-    // Update an existing task in the database
-    // public function update(Request $request, $id)
-    // {
-    //     // dd($request->all());
-    // //     return redirect()->route('Penugasan.index')->with('success', 'Tugas berhasil diperbarui');
-    // $penugasan = Penugasan::findOrFail($id);
-    // $penugasan->kegiatan = $request->kegiatan;
-    // $penugasan->catatan = $request->input('catatan');
-    // $penugasan->status = 'Terkirim'; // Change status to 'Terkirim'
-    // $penugasan->pengumpulan = now(); // Set the current date and time as 'pengumpulan'
-    // $penugasan->save();
-
-    // return redirect()->route('Penugasan.index')->with('success', 'Tugas berhasil disubmit.');
-
-    // }
-
     public function update(Request $request, $id)
     {
         // Temukan penugasan berdasarkan ID
@@ -151,84 +170,6 @@ class PenugasanController extends Controller
         return redirect()->route('Penugasan.index')->with('success', 'Tugas berhasil diperbarui.');
     }
 
-
-
-
-    //gak kena ini
-    // public function update(Request $request, Penugasan $penugasan)
-    // {
-    //     // Validate incoming request data
-    //     $validatedData = $request->validate([
-    //         'tertugas' => 'required|array',
-    //         'file' => 'nullable|mimes:pdf|max:2048',
-    //         'kegiatan' => 'required|string',
-    //         'status' => 'required|in:Tugas-Baru,Terkirim,Diperbaiki,Ditolak,Selesai',
-    //         'catatan' => 'nullable|string',
-    //         'deadline' => 'required|date',
-    //     ]);
-
-    //     // Handle file upload
-    //     if ($request->hasFile('file')) {
-    //         // Delete old file
-    //         if ($penugasan->file) {
-    //             Storage::delete($penugasan->file);
-    //         }
-
-    //         $fileName = time() . '.' . $request->file('file')->extension();
-    //         $path = $request->file('file')->storeAs('files', $fileName, 'public');
-    //     } else {
-    //         $path = $penugasan->file; // Keep existing file if no new file is uploaded
-    //     }
-
-    //     // Update the penugasan record
-    //     $penugasan->update([
-    //         'tertugas' => json_encode($validatedData['tertugas']), // Store as JSON
-    //         'file' => $path,
-    //         'kegiatan' => $validatedData['kegiatan'],
-    //         'status' => $validatedData['status'],
-    //         'catatan' => $validatedData['catatan'],
-    //         'deadline' => $validatedData['deadline'],
-    //     ]);
-
-    //     return redirect()->route('Penugasan.index')->with('success', 'Tugas berhasil diperbarui.');
-    // }
-
-    //hampir kena
-    // public function update(Request $request, $id)
-    // {
-    //     // dd($request->all());
-    //     $request->validate([
-    //         'tertugas' => 'required|array',
-    //         'file' => 'nullable|mimes:pdf',
-    //         'kegiatan' => 'required|string',
-    //         'status' => 'required|string',
-    //         'catatan' => 'nullable|string',
-    //         'deadline' => 'nullable|date',
-    //     ]);
-
-    //     $penugasan = Penugasan::findOrFail($id);
-
-    //     // Handle file upload if present
-    //     $filePath = $request->hasFile('file') ? $request->file('file')->store('files', 'public') : $penugasan->file;
-
-    //     // Update the existing penugasan or create a new one if needed
-    //     $penugasan->update([
-    //         'nama_penugas' => Auth::user()->name,
-    //         'tertugas' => implode(',', $request->tertugas),
-    //         'file' => $filePath,
-    //         'kegiatan' => $request->kegiatan,
-    //         'status' => $request->status,
-    //         'catatan' => $request->catatan,
-    //         'deadline' => $request->deadline,
-    //         'pengumpulan' => $penugasan->pengumpulan, // Retain existing value
-    //     ]);
-    //     dd($request->all());
-
-    //     return redirect()->route('Penugasan.index')->with('success', 'Tugas berhasil diperbarui');
-    // }
-
-
-
     // Show the form for submitting a task
     public function submit($id)
     {
@@ -238,16 +179,50 @@ class PenugasanController extends Controller
     }
 
     // Update a task's status to 'Terkirim', add a note, and set the submission date
-    public function submitUpdate(Request $request, $id)
-    {
-        $penugasan = Penugasan::findOrFail($id);
-        $penugasan->catatan = $request->input('catatan');
-        $penugasan->status = 'Terkirim'; // Change status to 'Terkirim'
-        $penugasan->pengumpulan = now(); // Set the current date and time as 'pengumpulan'
-        $penugasan->save();
+    // public function submitUpdate(Request $request, $id)
+    // {
+    //     $penugasan = Penugasan::findOrFail($id);
+    //     $penugasan->catatan = $request->input('catatan');
+    //     $penugasan->status = 'Terkirim'; // Change status to 'Terkirim'
+    //     $penugasan->pengumpulan = now(); // Set the current date and time as 'pengumpulan'
+    //     $penugasan->save();
 
-        return redirect()->route('Penugasan.index')->with('success', 'Tugas berhasil disubmit.');
+    //     return redirect()->route('Penugasan.index')->with('success', 'Tugas berhasil disubmit.');
+    // }
+    public function submitUpdate(Request $request, $id)
+{
+    // Temukan penugasan berdasarkan ID
+    $penugasan = Penugasan::findOrFail($id);
+
+    // Validasi data yang diterima dari form
+    $request->validate([
+        'file' => 'nullable|mimes:pdf|max:2048',
+        'catatan' => 'nullable|string',
+    ]);
+
+    // Update catatan
+    $penugasan->catatan = $request->input('catatan');
+    $penugasan->status = 'Terkirim'; // Change status to 'Terkirim'
+    $penugasan->pengumpulan = now(); // Set the current date and time as 'pengumpulan'
+
+    // Tangani upload file jika ada
+    if ($request->hasFile('file')) {
+        // Hapus file lama jika ada
+        if ($penugasan->file) {
+            Storage::delete($penugasan->file);
+        }
+
+        // Upload file baru dan simpan path-nya
+        $file = $request->file('file')->store('files', 'public');
+        $penugasan->file = $file;
     }
+
+    // Simpan perubahan ke database
+    $penugasan->save();
+
+    return redirect()->route('Penugasan.index')->with('success', 'Tugas berhasil disubmit.');
+}
+
 
     // Delete an existing task
     public function destroy($id)
@@ -271,111 +246,11 @@ class PenugasanController extends Controller
         return redirect()->route('Penugasan.index')->with('success', 'Status berhasil diubah.');
     }
 
-    // public function print(Request $request)
-    // {
-    //     // Ambil data penugasan berdasarkan filter (jika ada)
-    //     $query = Penugasan::with('kategoriKegiatan');
-    //     $query = Penugasan::query();
-
-    //     if ($request->filled('bulan')) {
-    //         $query->whereMonth('created_at', $request->bulan);
-    //     }
-
-    //     if ($request->filled('tahun')) {
-    //         $query->whereYear('created_at', $request->tahun);
-    //     }
-
-    //     $penugasan = $query->get();
-
-    //     // Load view dan generate PDF
-    //     $pdf = PDF::loadView('admin.monitoring_tanggungan_kinerja.print', compact('penugasan'));
-    //     foreach ($penugasan as $item) {
-    //         $item->kegiatan; // Now you can access 'kegiatan'
-    //     }
-
-    //     $penugasan = $query->get();
-    //     $users = User::all();
-    //     $currentUser = Auth::user();
-    //     $tahun = Tahun::all();
-    //     $kategoriKegiatan = KategoriKegiatan::all();
-
-    //     // Download PDF
-    //     return $pdf->download('laporan_penugasan.pdf', compact('penugasan', 'users', 'currentUser', 'tahun', 'kategoriKegiatan'));
-    // }
-
-    //     public function print(Request $request)
-    // {
-    //     // Ambil data penugasan berdasarkan filter (jika ada)
-    //     $query = Penugasan::with('kategoriKegiatan');
-    //     if ($request->filled('bulan')) {
-    //         $query->whereMonth('created_at', $request->bulan);
-    //     }
-    //     if ($request->filled('tahun')) {
-    //         $query->whereYear('created_at', $request->tahun);
-    //     }
-    //     $penugasan = $query->get();
-
-    //     // Generate PDF untuk setiap penugasan
-    //     foreach ($penugasan as $item) {
-    //         $pdf = PDF::loadView('admin.monitoring_tanggungan_kinerja.print', compact('item'));
-    //         return $pdf->download('laporan_penugasan_' . $item->id . '.pdf');
-    //     }
-    // }
-
-    //function printallnya udah kenak kok
-    // public function printAll(Request $request)
-    // {
-    //     Carbon::setLocale('id');
-    //     // Ambil data penugasan berdasarkan filter
-    //     $query = Penugasan::with('kategoriKegiatan');
-    //     // ... (kondisi filter)
-
-    //     $penugasan = $query->get();
-
-    //     // Generate PDF untuk semua data
-    //     $pdf = PDF::loadView('admin.monitoring_tanggungan_kinerja.print_all', compact('penugasan'));
-    //     return $pdf->download('laporan_penugasan_semua.pdf');
-    // }
-
-//     public function printForm()
-// {
-//     return view('admin.monitoring_tanggungan_kinerja.cetak_laporan');
-// }
-
-// public function printData(Request $request)
-// {
-//     $request->validate([
-//         'tanggal_awal' => 'required|date',
-//         'tanggal_akhir' => 'required|date|after:tanggal_awal',
-//     ]);
-
-//     $penugasan = Penugasan::whereBetween('deadline', [$request->tanggal_awal, $request->tanggal_akhir])
-//                             ->get();
-
-//     $pdf = PDF::loadView('admin.monitoring_tanggungan_kinerja.print_all', compact('penugasan'));
-//     return $pdf->download('laporan_penugasan_' . date('YmdHis') . '.pdf');
-// }
 
 public function printForm()
 {
     return view('admin.monitoring_tanggungan_kinerja.cetak_laporan');
 }
-
-// public function printData(Request $request)
-// {
-//     $request->validate([
-//         'tanggal_awal' => 'required|date',
-//         'tanggal_akhir' => 'required|date|after:tanggal_awal',
-//     ]);
-
-//     $penugasan = Penugasan::whereBetween('deadline', [$request->tanggal_awal, $request->tanggal_akhir])
-//                             ->get();
-
-//     // dd($penugasan);
-//     $pdf = PDF::loadView('admin.monitoring_tanggungan_kinerja.print_all', compact('penugasan'));
-//     return $pdf->download('laporan_penugasan_' . date('YmdHis') . '.pdf');
-// }
-
 
 //ini bisa
 public function printAll(Request $request)

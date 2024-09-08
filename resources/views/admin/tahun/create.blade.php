@@ -19,6 +19,7 @@
                         <input type="text" class="form-control" id="data_tahun" name="data_tahun" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
+                    <a href="{{ route('Tahun.index') }}" class="btn btn-secondary">Cancel</a>
                 </form>
             </div>
         </div>

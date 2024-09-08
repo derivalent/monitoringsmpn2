@@ -160,6 +160,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
     Route::prefix('penugasan')->group(function () {
         Route::get('/', [PenugasanController::class, 'index'])->name('Penugasan.index');
+        Route::get('/index_data', [PenugasanController::class, 'index_data'])->name('Penugasan.index_data');
         Route::post('/change-status/{penugasan}', [PenugasanController::class, 'updateStatus'])->name('Penugasan.changeStatus');
         Route::get('/create', [PenugasanController::class, 'create'])->name('Penugasan.create');
         Route::post('/store', [PenugasanController::class, 'store'])->name('Penugasan.store');

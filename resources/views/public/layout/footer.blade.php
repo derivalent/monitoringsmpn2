@@ -11,8 +11,8 @@
                 </ul>
             </div>
             <div class="col-md-6 mb-3 contact-info">
-                <p><i class="fas fa-map-marker-alt"></i><span class="ms-2">Jalan Sragi Gendoh, Desa Gendoh,
-                    Kecamatan Sempu, Kabupaten Banyuwangi.</span></p>
+                <p><i class="fas fa-map-marker-alt"></i><span class="ms-2">Jln Sragi Gendoh, Desa Gendoh,
+                    Kec. Sempu, Kab. Banyuwangi.</span></p>
                 <p><i class="fas fa-phone"></i><span class="ms-2">0333 422113</span></p>
                 <p><i class="fas fa-envelope"></i><span class="ms-2">smpn2sempu01@gmail.com</span></p>
             </div>

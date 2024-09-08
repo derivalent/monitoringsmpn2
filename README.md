@@ -76,4 +76,5 @@ dibuat dari template start-botstrap dengan menambahkan cdn fontawasome, cdn data
 2. Lakukan "php artisan migrate" untuk merelasikan tabel dengan database yang telah ditentukan
 3. Lakukan "php artisan db:seed --class=RoleSeeder" untuk mengintruksikan injeksi data pada RoleSeeder
 4. Lakukan "php artisan db:seed --class=UserSeeder" untuk injeksi data user pada UserSeeder
-5. Lakukan "php artisan serve" untuk menjalankan server lokal pada device yang digunakan
+5. Lakukan "php artisan storage:link" untuk link data storage
+6. Lakukan "php artisan serve" untuk menjalankan server lokal pada device yang digunakan
