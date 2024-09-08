@@ -110,7 +110,7 @@
     </div>
     <hr class="my-4 mb-1">
     <div claa="body">
-        <h5>Lporan Tanggungan Kinerja</h5>
+        <h5>Laporan Tanggungan Kinerja</h5>
         <table>
             <thead>
                 <tr>

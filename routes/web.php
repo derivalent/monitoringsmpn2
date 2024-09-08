@@ -101,7 +101,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::put('/laporan_kegiatan/{id}', [LaporanKegiatanController::class, 'update'])->name('LaporanKegiatan.update');
     Route::delete('/laporan_kegiatan/{id}', [LaporanKegiatanController::class, 'destroy'])->name('LaporanKegiatan.destroy');
     //Monitoring Laporan Kegiatan
-    Route::get('/monitoring_laporan_kegiatan', [LaporanKegiatanController::class, 'monitoring_laporan_kegiatan']);
+    Route::get('/monitoring_laporan_kegiatan', [LaporanKegiatanController::class, 'monitoring_laporan_kegiatan'])->name('MonitoringLaporanKegiatan');
 
     //Kategori Kegiatan
     Route::get('/kategori_kegiatan', [KategoriKegiatanController::class, 'index'])->name('KategoriKegiatan.index');

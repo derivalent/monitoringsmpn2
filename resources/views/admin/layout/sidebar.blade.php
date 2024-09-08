@@ -38,7 +38,7 @@
                 <div class="collapse" id="collapseLayouts2" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link" href="{{ route('Penugasan.index') }}">Monitoring - Tanggungan Kinerja</a>
-                        <a class="nav-link" href="{{ 'monitoring_laporan_kegiatan' }}">Monitoring - Laporan Kegiatan</a>
+                        <a class="nav-link" href="{{ route('MonitoringLaporanKegiatan') }}">Monitoring - Laporan Kegiatan</a>
                         {{-- <a class="nav-link" href="layout-sidenav-light.html">Notulensi</a>
                         <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a> --}}
                     </nav>
@@ -52,7 +52,7 @@
                 <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link" href="{{ route('Penugasan.index_data') }}">Tanggungan Kinerja</a>
-                        <a class="nav-link" href="{{ 'laporan_kegiatan' }}">Laporan Kegiatan</a>
+                        <a class="nav-link" href="{{ route('LaporanKegiatan.index') }}">Laporan Kegiatan</a>
                     </nav>
                 </div>
                 {{-- <div class="sb-sidenav-menu-heading">User Management</div>

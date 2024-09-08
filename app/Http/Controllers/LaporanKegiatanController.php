@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Tahun;
 use App\Models\KategoriKegiatan;
 use App\Models\LaporanKegiatan;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class LaporanKegiatanController extends Controller
 {
@@ -16,32 +18,43 @@ class LaporanKegiatanController extends Controller
     //     $tahun = Tahun::all();
     //     return view('admin.laporan_kegiatan.index', compact('kategoriKegiatan', 'laporanKegiatan','tahun'));
     // }
-    public function index(Request $request) {
-        $query = LaporanKegiatan::query();
+    public function index(Request $request)
+    {
+        // Mendapatkan nama user yang sedang login
+        $userName = Auth::user()->name;
 
-        // Filter berdasarkan bulan dan tahun jika ada input
+        // Query dasar, termasuk filter nama user
+        $query = LaporanKegiatan::where('nama', $userName);
+
+        // Filter berdasarkan bulan jika ada input
         if ($request->filled('bulan')) {
             $query->whereMonth('created_at', $request->bulan);
         }
 
+        // Filter berdasarkan tahun jika ada input
         if ($request->filled('tahun')) {
             $query->whereYear('created_at', $request->tahun);
         }
 
+        // Mengambil data berdasarkan filter
         $laporanKegiatan = $query->get();
         $kategoriKegiatan = KategoriKegiatan::all();
         $tahun = Tahun::all();
+
+
 
         return view('admin.laporan_kegiatan.index', compact('kategoriKegiatan', 'laporanKegiatan', 'tahun'));
     }
 
 
-    public function create() {
+    public function create()
+    {
         $kategoriKegiatan = KategoriKegiatan::all();
         return view('admin.laporan_kegiatan.create', compact('kategoriKegiatan'));
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $validateData = $request->validate([
             'nama' => 'required|string',
             'kategori_id' => 'required|exists:kategori_kegiatan,id',
@@ -66,13 +79,15 @@ class LaporanKegiatanController extends Controller
         return redirect()->route('LaporanKegiatan.index')->with('success', 'Laporan Kegiatan added successfully.');
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $laporanKegiatan = LaporanKegiatan::findOrFail($id);
         $kategoriKegiatan = KategoriKegiatan::all();
         return view('admin.laporan_kegiatan.edit', compact('laporanKegiatan', 'kategoriKegiatan'));
     }
 
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         $validateData = $request->validate([
             'nama' => 'required|string',
             'kategori_id' => 'required|exists:kategori_kegiatan,id',
@@ -106,7 +121,8 @@ class LaporanKegiatanController extends Controller
         return redirect()->route('LaporanKegiatan.index')->with('success', 'Laporan Kegiatan updated successfully.');
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $laporanKegiatan = LaporanKegiatan::findOrFail($id);
 
         // Hapus gambar jika ada
@@ -118,8 +134,42 @@ class LaporanKegiatanController extends Controller
         return redirect()->route('LaporanKegiatan.index')->with('success', 'Laporan Kegiatan deleted successfully.');
     }
 
-    public function monitoring_laporan_kegiatan() {
-        $laporanKegiatan = LaporanKegiatan::all();
-        return view('admin.monitoring_laporan_kegiatan', compact('laporanKegiatan'));
+    // public function monitoring_laporan_kegiatan(Request $request) {
+    //     // $laporanKegiatan = LaporanKegiatan::all();
+    //     $query = LaporanKegiatan::query();
+
+    //     // Filter berdasarkan bulan dan tahun jika ada input
+    //     if ($request->filled('bulan')) {
+    //         $query->whereMonth('created_at', $request->bulan);
+    //     }
+
+    //     if ($request->filled('tahun')) {
+    //         $query->whereYear('created_at', $request->tahun);
+    //     }
+
+    //     $laporanKegiatan = $query->get();
+    //     $kategoriKegiatan = KategoriKegiatan::all();
+    //     $tahun = Tahun::all();
+    //     // return view('admin.laporan_kegiatan.index_data', compact('laporanKegiatan'));
+    //     return view('admin.laporan_kegiatan.index_data', compact('kategoriKegiatan', 'laporanKegiatan', 'tahun'));
+    // }
+    public function monitoring_laporan_kegiatan(Request $request)
+    {
+
+        $query = LaporanKegiatan::query();
+
+        // Filter berdasarkan bulan dan tahun jika ada input
+        if ($request->filled('bulan')) {
+            $query->whereMonth('created_at', $request->bulan);
+        }
+
+        if ($request->filled('tahun')) {
+            $query->whereYear('created_at', $request->tahun);
+        }
+
+        $laporanKegiatan = $query->get();
+        $kategoriKegiatan = KategoriKegiatan::all();
+        $tahun = Tahun::all();
+        return view('admin.laporan_kegiatan.index_data', compact('kategoriKegiatan', 'laporanKegiatan', 'tahun'));
     }
 }
