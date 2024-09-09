@@ -135,7 +135,7 @@
                             <th>Kategori</th>
                             <th>Gambar</th>
                             <th>Keterangan</th>
-                            <th>Aksi</th>
+                            {{-- <th>Aksi</th> --}}
                         </tr>
                     </thead>
                     <tfoot class="tampilantabel">
@@ -145,7 +145,7 @@
                             <th>Kategori</th>
                             <th>File</th>
                             <th>Keterangan</th>
-                            <th>Aksi</th>
+                            {{-- <th>Aksi</th> --}}
                         </tr>
                     </tfoot>
                     <tbody>
@@ -158,15 +158,7 @@
                                 <img src="{{Storage::url('images_laporan/' . $lk->gambar) }}" alt="Gambar" style="width: 100px; cursor: pointer;" onclick="openImageModal('path/to/image.jpg')">
                             </td>
                             <td class="isi-konten">{{ $lk->keterangan }}</td>
-                            {{-- <td>
-                                <a href="{{ route('LaporanKegiatan.edit', $lk->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                <form action="{{ route('LaporanKegiatan.destroy', $lk->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
-                                </form>
-                            </td> --}}
-                            <td style="white-space: nowrap;">
+                            {{-- <td style="white-space: nowrap;">
                                 <div style="display: flex; justify-content: space-around; align-items: center; gap: 8px;">
                                     <form action="{{ route('LaporanKegiatan.destroy', $lk->id) }}" method="POST">
                                         @csrf
@@ -179,7 +171,7 @@
                                         <i class="fas fa-edit" style="font-size: 15px;"></i>
                                     </a>
                                 </div>
-                            </td>
+                            </td> --}}
                         </tr>
                         @endforeach
                         {{-- <tr>

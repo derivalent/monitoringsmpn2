@@ -8,7 +8,7 @@
                 <li class="breadcrumb-item active"><a href="#">Dashboard</a></li>
                 <li class="breadcrumb-item active">Monitoring Tanggungan Kinerja</li>
             </ol>
-            @if (Auth::user()->role == 1 || Auth::user()->role == 2 || Auth::user()->role == 3)
+            {{-- @if (Auth::user()->role == 1 || Auth::user()->role == 2 || Auth::user()->role == 3) --}}
                 <div class="card mb-4">
                     <div class="card-header">
                         <div class="row align-items-center">
@@ -156,7 +156,7 @@
                                                     style="background: none; border: none; color: orange; padding: 0;">
                                                     <i class="fas fa-edit" style="font-size: 15px;"></i>
                                                 </a> --}}
-                                                <form action="{{ route('Penugasan.submit', $item->id) }}" method="POST">
+                                                <form action="{{ route('Penugasan.submit_data', $item->id) }}" method="POST">
                                                     @csrf
                                                     <button type="submit" class="btn btn-sm"
                                                         style="background: none; border: none; color: rgb(6, 91, 229); padding: 0;">
@@ -236,9 +236,9 @@
 
                     </div>
                 </div>
-            @endif
+            {{-- @endif --}}
         </div>
-    </div>
-</div>
-</main>
+        {{-- </div>
+        </div> --}}
+    </main>
 @endsection

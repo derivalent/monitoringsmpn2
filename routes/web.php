@@ -168,7 +168,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
         Route::put('/{penugasan}', [PenugasanController::class, 'update'])->name('Penugasan.update');
         Route::delete('/{penugasan}', [PenugasanController::class, 'destroy'])->name('Penugasan.destroy');
         Route::post('/{penugasan}/submit', [PenugasanController::class, 'submit'])->name('Penugasan.submit');
+        Route::post('/{penugasan}/submit_data', [PenugasanController::class, 'submit_data'])->name('Penugasan.submit_data');
         Route::put('/{penugasan}/submitUpdate', [PenugasanController::class, 'submitUpdate'])->name('Penugasan.submitUpdate');
+        Route::put('/{penugasan}/submitUpdate_data', [PenugasanController::class, 'submitUpdate_data'])->name('Penugasan.submitUpdate_data');
         // Route::get('/penugasan/print', [PenugasanController::class, 'print'])->name('Penugasan.print');
         Route::get('/penugasan/print-all', [PenugasanController::class, 'printAll'])->name('penugasan.print.all');
 

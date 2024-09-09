@@ -178,6 +178,13 @@ class PenugasanController extends Controller
         return view('admin.monitoring_tanggungan_kinerja.submit', compact('penugasan', 'kategoriKegiatan'));
     }
 
+    public function submit_data($id)
+    {
+        $penugasan = Penugasan::findOrFail($id);
+        $kategoriKegiatan = KategoriKegiatan::all();
+        return view('admin.monitoring_tanggungan_kinerja.submit_data', compact('penugasan', 'kategoriKegiatan'));
+    }
+
     // Update a task's status to 'Terkirim', add a note, and set the submission date
     // public function submitUpdate(Request $request, $id)
     // {
@@ -221,6 +228,40 @@ class PenugasanController extends Controller
     $penugasan->save();
 
     return redirect()->route('Penugasan.index')->with('success', 'Tugas berhasil disubmit.');
+}
+
+public function submitUpdate_data(Request $request, $id)
+{
+    // Temukan penugasan berdasarkan ID
+    $penugasan = Penugasan::findOrFail($id);
+
+    // Validasi data yang diterima dari form
+    $request->validate([
+        'file' => 'nullable|mimes:pdf|max:2048',
+        'catatan' => 'nullable|string',
+    ]);
+
+    // Update catatan
+    $penugasan->catatan = $request->input('catatan');
+    $penugasan->status = 'Terkirim'; // Change status to 'Terkirim'
+    $penugasan->pengumpulan = now(); // Set the current date and time as 'pengumpulan'
+
+    // Tangani upload file jika ada
+    if ($request->hasFile('file')) {
+        // Hapus file lama jika ada
+        if ($penugasan->file) {
+            Storage::delete($penugasan->file);
+        }
+
+        // Upload file baru dan simpan path-nya
+        $file = $request->file('file')->store('files', 'public');
+        $penugasan->file = $file;
+    }
+
+    // Simpan perubahan ke database
+    $penugasan->save();
+
+    return redirect()->route('Penugasan.index_data')->with('success', 'Tugas berhasil disubmit.');
 }
 
 
