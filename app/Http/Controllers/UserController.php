@@ -14,7 +14,8 @@ class UserController extends Controller
     //     $this->middleware (['role:1']);
     // }
 
-    public function kelola_pengguna() {
+    public function kelola_pengguna()
+    {
         // // $user = User::get();
         // $user = User::join('role','id_role','=','users','role')->get();
         // return view('admin.pengguna.kelola_pengguna', ['user' => $user]);
@@ -22,20 +23,22 @@ class UserController extends Controller
         // // $user = User::get();
         // // return view('admin.pengguna.kelola_pengguna');
         $users = User::join('role as r', 'users.role', '=', 'r.id_role')
-        ->select('users.*', 'r.role as role')
-        ->get();
+            ->select('users.*', 'r.role as role')
+            ->get();
 
-    return view('admin.pengguna.kelola_pengguna', ['user' => $users]);
+        return view('admin.pengguna.kelola_pengguna', ['user' => $users]);
 
-    return abort(403);
+        return abort(403);
     }
 
-    public function create() {
-        $data ['role'] = Role::all();
+    public function create()
+    {
+        $data['role'] = Role::all();
         return view('admin.pengguna.create', $data);
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         // Validate the incoming request data
         $validatedData = $request->validate([
             'nip' => 'required|string|max:255',
@@ -76,31 +79,35 @@ class UserController extends Controller
         return redirect()->route('kelola_pengguna')->with('success', 'User added successfully.');
     }
 
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+        $data['role'] = Role::all();
+        return view('admin.pengguna.edit', ['user' => $user] + $data);
+    }
 
-    // public function store(Request $request) {
+    // public function update(Request $request, $id) {
     //     $validatedData = $request->validate([
     //         'nip' => 'required|string|max:255',
-    //         'nama' => 'required|string|max:255',
-    //         'jenis_kelamin' => 'required|in:pria,wanita',
+    //         'name' => 'required|string|max:255',
+    //         'jenis_kelamin' => 'required|string',
     //         'tempat_lahir' => 'required|string|max:255',
     //         'tanggal_lahir' => 'required|date',
     //         'pendidikan_terakhir' => 'required|string|max:255',
     //         'jabatan' => 'required|string|max:255',
-    //         'status_pekerjaan' => 'required|in:pns,honorer',
+    //         'status_pekerjaan' => 'required|string',
     //         'bidang_studi' => 'required|string|max:255',
-    //         'role' => 'required|exists:role,id_role',
+    //         'role' => 'required|exists:role,id_role', // Mengubah 'roles' menjadi 'role'
     //         'alamat' => 'required|string',
-    //         'email' => 'required|email|unique:users,email',
+    //         'email' => 'required|email|unique:users,email,' . $id,
     //         'telepon' => 'required|string|max:15',
-    //         'password' => 'required|string|min:8', // Add this line to validate password
+    //         // 'password' => 'nullable|string|min:8',
     //     ]);
 
-    //         // Log data untuk debugging
-    //     // \Log::info('Validated Data:', $validatedData);
-
-    //     User::create([
+    //     $user = User::findOrFail($id);
+    //     $user->update([
     //         'nip' => $validatedData['nip'],
-    //         'name' => $validatedData['nama'],
+    //         'name' => $validatedData['name'],
     //         'jenis_kelamin' => $validatedData['jenis_kelamin'],
     //         'tempat_lahir' => $validatedData['tempat_lahir'],
     //         'tanggal_lahir' => $validatedData['tanggal_lahir'],
@@ -112,24 +119,16 @@ class UserController extends Controller
     //         'alamat' => $validatedData['alamat'],
     //         'email' => $validatedData['email'],
     //         'telepon' => $validatedData['telepon'],
-    //         'password' => Hash::make($validatedData['password']), // Hash the password
+    //         // 'password' => $validatedData['password'] ? Hash::make($validatedData['password']) : $user->password,
     //     ]);
-    //     // $user->nip = $request->nip;
-    //     // $user->name = $request->name;
 
-    //     // $user->save();
-    //     dd($validatedData);
-
-    //     return redirect()->route('user.create')->with('success', 'User created successfully.');
+    //     return redirect()->route('kelola_pengguna')->with('success', 'User updated successfully.');
     // }
 
-    public function edit($id) {
-            $user = User::findOrFail($id);
-            $data['role'] = Role::all();
-            return view('admin.pengguna.edit', ['user' => $user] + $data);
-        }
 
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
+        // Validasi data, password bisa nullable karena tidak wajib diisi saat edit
         $validatedData = $request->validate([
             'nip' => 'required|string|max:255',
             'name' => 'required|string|max:255',
@@ -140,40 +139,38 @@ class UserController extends Controller
             'jabatan' => 'required|string|max:255',
             'status_pekerjaan' => 'required|string',
             'bidang_studi' => 'required|string|max:255',
-            'role' => 'required|exists:role,id_role', // Mengubah 'roles' menjadi 'role'
+            'role' => 'required|exists:role,id_role',
             'alamat' => 'required|string',
             'email' => 'required|email|unique:users,email,' . $id,
             'telepon' => 'required|string|max:15',
-            // 'password' => 'nullable|string|min:8',
+            'password' => 'nullable|string|min:8', // Password optional
         ]);
 
+        // Temukan user berdasarkan id
         $user = User::findOrFail($id);
-        $user->update([
-            'nip' => $validatedData['nip'],
-            'name' => $validatedData['name'],
-            'jenis_kelamin' => $validatedData['jenis_kelamin'],
-            'tempat_lahir' => $validatedData['tempat_lahir'],
-            'tanggal_lahir' => $validatedData['tanggal_lahir'],
-            'pendidikan_terakhir' => $validatedData['pendidikan_terakhir'],
-            'jabatan' => $validatedData['jabatan'],
-            'status_pekerjaan' => $validatedData['status_pekerjaan'],
-            'bidang_studi' => $validatedData['bidang_studi'],
-            'role' => $validatedData['role'],
-            'alamat' => $validatedData['alamat'],
-            'email' => $validatedData['email'],
-            'telepon' => $validatedData['telepon'],
-            // 'password' => $validatedData['password'] ? Hash::make($validatedData['password']) : $user->password,
-        ]);
 
+        // Jika password diisi, encrypt password baru
+        if ($request->filled('password')) {
+            $validatedData['password'] = Hash::make($request->password);
+        } else {
+            // Jika password tidak diisi, gunakan password lama
+            unset($validatedData['password']);
+        }
+
+        // Update data user dengan yang tervalidasi
+        $user->update($validatedData);
+
+        // Redirect dengan pesan sukses
         return redirect()->route('kelola_pengguna')->with('success', 'User updated successfully.');
     }
 
+
     public function destroy($id)
     {
-    $user = User::findOrFail($id);
-    $user->delete();
+        $user = User::findOrFail($id);
+        $user->delete();
 
-    return redirect()->route('kelola_pengguna')->with('success', 'Kategori Kegiatan deleted successfully.');
+        return redirect()->route('kelola_pengguna')->with('success', 'Kategori Kegiatan deleted successfully.');
     }
 
 

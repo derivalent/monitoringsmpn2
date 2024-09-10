@@ -3,10 +3,10 @@
 @section('content')
     <main>
         <div class="container-fluid px-4">
-            <h3 class="mt-4"><b>MONITORING - TANGGUNGAN KINERJA</b></h3>
+            <h3 class="mt-4"><b>PENUGASAN - TANGGUNGAN KINERJA</b></h3>
             <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item active"><a href="#">Dashboard</a></li>
-                <li class="breadcrumb-item active">Monitoring Tanggungan Kinerja</li>
+                <li class="breadcrumb-item active"><a href="{{ route('KategoriKegiatan.index') }}">Dashboard</a></li>
+                <li class="breadcrumb-item active">Tanggungan Kinerja</li>
             </ol>
             {{-- @if (Auth::user()->role == 1 || Auth::user()->role == 2 || Auth::user()->role == 3) --}}
                 <div class="card mb-4">

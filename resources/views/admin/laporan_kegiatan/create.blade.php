@@ -2,7 +2,7 @@
 @section('content')
 <main>
     <div class="container-fluid px-4">
-        <h3 class="mt-4"><b>LAPORAN KEGIATAN - ADMIN </b></h3>
+        <h3 class="mt-4"><b>LAPORAN KEGIATAN - CREATE </b></h3>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item active"><a href="{{ 'dashboard_admin' }}">Dashboard</a></li>
             <li class="breadcrumb-item active">Form Tambah Laporan Kegiatan</li>
@@ -19,7 +19,7 @@
                         <label for="nama">Nama:</label>
                         <input type="text" name="nama" id="nama" class="form-control" required>
                     </div> --}}
-                    
+
                     <!-- Nama User (Hidden Field) -->
                     <input type="hidden" name="nama" value="{{ Auth::user()->name }}">
 
